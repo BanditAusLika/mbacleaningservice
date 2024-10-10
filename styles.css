@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&family=Dancing+Script:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+}
+
+header {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: black;
+    text-align: center;
+    padding: 2rem 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 250px; /* Increased gap for more space between images and logo */
+}
+
+.logo {
+    max-width: 300px; /* Increased size of the logo */
+    height: 300px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.side-image {
+    max-width: 600px; /* Increased size of side images */
+    height: 600px;
+    transition: all 0.3s ease;
+}
+
+.logo:hover, .side-image:hover {
+    box-shadow: 0 0 20px #fff, 0 0 30px #0073e6, 0 0 40px #0073e6;
+    cursor: pointer;
+}
+
+h1.glow {
+    text-shadow: 0 0 10px #fff, 0 0 20px #0073e6, 0 0 30px #0073e6, 0 0 40px #0073e6, 0 0 50px #0073e6, 0 0 60px #0073e6, 0 0 70px #0073e6;
+}
+
+p.tagline.glow {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    text-shadow: 0 0 10px #fff, 0 0 20px #ffcc00, 0 0 30px #ff9900, 0 0 40px #ff6600, 0 0 50px #ff3300;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 1rem 0;
+}
+
+nav a {
+    color: black;
+    padding: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-shadow: 0 0 10px #fff, 0 0 20px #0073e6, 0 0 30px #0073e6;
+}
+
+.container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2rem;
+}
+
+.services-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.services-list li {
+    background-color: rgba(230, 242, 255, 0.9);
+    margin: 0.5rem 0;
+    padding: 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.services-list li:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 0 10px #fff, 0 0 20px #0073e6, 0 0 30px #0073e6;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form input[type="submit"] {
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-form input[type="submit"]:hover {
+    background-color: #005bb5;
+    text-shadow: 0 0 10px #fff, 0 0 20px #0073e6, 0 0 30px #0073e6;
+}
+
+.glow-hover:hover {
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+}
+
+.facebook-button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    background-color: #3b5998;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.facebook-button:hover {
+    background-color: #2d4373;
+}
+
+/* Footer styling */
+footer {
+    background-color: rgba(0, 115, 230, 0.9);
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    position: relative;
+    width: 100%;
+}
+
+.footer-text {
+    font-family: 'Orbitron', sans-serif; /* Cool futuristic font */
+    font-size: 1rem;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.footer-text:hover {
+    text-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99, 0 0 30px #00ff99;
+    color: #00ff99;
+}
+
+.fire-glow {
+    color: #ffcc00;
+    text-shadow: 0 0 10px #ffcc00, 0 0 20px #ff9900, 0 0 30px #ff6600, 0 0 40px #ff3300;
+    transition: all 0.3s ease;
+}
+
+.fire-glow:hover {
+    color: #ff3300;
+    text-shadow: 0 0 20px #ff3300, 0 0 30px #ff0000, 0 0 40px #cc0000, 0 0 50px #990000;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.gallery-grid img, .gallery-grid video {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery-grid img:hover, .gallery-grid video:hover {
+    transform: scale(1.05);
+}

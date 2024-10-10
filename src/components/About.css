@@ -1,0 +1,19 @@
+/* About Section Styling */
+.about-container {
+  background-color: #222;
+  padding: 40px;
+  color: #f0f0f0;
+  text-align: center;
+}
+
+.about-container h2 {
+  color: #00aaff;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.about-container p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}

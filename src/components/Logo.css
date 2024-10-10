@@ -1,0 +1,18 @@
+.centered-logo {
+  width: 200px;
+  height: auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+.centered-logo:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 1);
+}
+
+.centered-logo.enlarged {
+  width: 300px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 1);
+}
+
