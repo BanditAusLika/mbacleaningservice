@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "MBA Cleaning",
+  "name": "MBA Cleaning and Vegetation Services",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +18,11 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#0a0a0a",
+  "background_color": "#ffffff",
+  "description": "Professional cleaning and vegetation management services across Melbourne by MBA Cleaning and Vegetation Services.",
+  "lang": "en-AU",
+  "orientation": "portrait"
 }
