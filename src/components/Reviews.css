@@ -1,67 +1,40 @@
-/* Container for the reviews section */
 .reviews-section {
-  background-color: #1e1e1e;
-  color: #00ffff;
-  padding: 50px 20px;
+  background-color: #111;
+  color: #f0f0f0;
+  padding: 60px 20px;
   text-align: center;
-  font-family: 'Orbitron', sans-serif;
-  max-width: 1200px; /* Set a maximum width to prevent squeezing on large screens */
-  margin: 0 auto; /* Center the section horizontally */
 }
 
-/* Review card styling */
+.reviews-title {
+  font-size: 2.8rem;
+  margin-bottom: 40px;
+  color: #00aaff;
+}
+
 .review-card {
-  background-color: #2e2e2e;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-  transition: transform 0.3s;
-  max-width: 80%; /* Limit the width so it's not too stretched */
-  margin: 20px auto; /* Add margin for spacing between reviews */
+  background-color: #1e1e1e;
+  border-radius: 15px;
+  padding: 30px 20px;
+  margin: 0 auto;
+  max-width: 800px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .review-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
 }
 
 .review-text {
-  font-size: 1.4rem; /* Adjust font size */
-  margin-bottom: 15px;
-  text-shadow: 0 0 5px #00ffff;
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-bottom: 20px;
+  line-height: 1.6;
 }
 
 .reviewer-name {
-  font-size: 1.2rem; /* Adjust font size */
+  font-size: 1rem;
   font-weight: bold;
-  text-shadow: 0 0 5px #00ffff;
-}
-
-/* Ensure buttons and navigation elements also look good */
-.swiper-button-prev, .swiper-button-next {
-  color: #00ffff;
-}
-
-.swiper-pagination-bullet {
-  background: #00ffff;
-  opacity: 0.7;
-}
-
-.swiper-pagination-bullet-active {
-  opacity: 1;
-}
-
-/* Media Queries for smaller screens */
-@media (max-width: 768px) {
-  .review-text {
-    font-size: 1.2rem; /* Reduce font size for smaller screens */
-  }
-
-  .review-card {
-    max-width: 95%; /* Allow more width on smaller screens */
-    padding: 15px;
-  }
-
-  .reviews-section {
-    padding: 30px 10px; /* Reduce padding on smaller screens */
-  }
+  color: #00aaff;
 }

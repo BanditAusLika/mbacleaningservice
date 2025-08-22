@@ -1,38 +1,46 @@
-/* Contact Section */
 .contact-container {
-  text-align: center;
-  padding: 40px;
-  background-color: #222;
+  padding: 80px 20px;
+  background-color: #1a1a1a;
   color: #f0f0f0;
+  text-align: center;
 }
 
-.contact-container h2 {
-  color: #00aaff;
+.contact-heading {
   font-size: 2.5rem;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  color: #00ffff;
 }
 
 .contact-list {
   list-style: none;
   padding: 0;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .contact-item {
-  margin-bottom: 20px;
-  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  font-size: 1.2rem;
+  flex-wrap: wrap;
+  line-height: 1.6;
 }
 
 .contact-icon {
   margin-right: 10px;
-  color: #0066cc;
-  vertical-align: middle;
+  color: #00ffff;
+  font-size: 1.5rem;
 }
 
-.contact-container a {
-  color: #66ccff;
+.contact-item a {
+  color: #00ffff;
+  font-weight: bold;
+  margin: 0 5px;
   text-decoration: none;
 }
 
-.contact-container a:hover {
+.contact-item a:hover {
   text-decoration: underline;
 }

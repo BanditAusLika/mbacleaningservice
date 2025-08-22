@@ -1,16 +1,17 @@
-// NavBar.js
 import React from 'react';
 import './NavBar.css';
 
 const NavBar = () => {
   return (
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#about">About Us</a>
-      <a href="#services">Cleaning Services</a>
-      <a href="#vegetation">Vegetation Services</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#contact">Contact</a>
+    <nav className="navbar">
+      <ul className="nav-list">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Cleaning Services</a></li>
+        <li><a href="#vegetation">Vegetation Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
   );
 };

@@ -1,18 +1,19 @@
-.centered-logo {
-  width: 200px;
+.logo-wrapper {
+  text-align: center;
+  margin-top: 140px; /* to push below fixed header */
+  margin-bottom: 30px;
+}
+
+.main-logo {
+  width: 220px;
   height: auto;
-  cursor: pointer;
-  transition: all 0.3s ease;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+  border: 3px solid #00f7ff;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.centered-logo:hover {
-  box-shadow: 0 0 20px rgba(0, 255, 255, 1);
+.main-logo.enlarged {
+  transform: scale(1.5);
+  box-shadow: 0 0 25px #00f7ff;
 }
-
-.centered-logo.enlarged {
-  width: 300px;
-  box-shadow: 0 0 30px rgba(0, 255, 255, 1);
-}
-

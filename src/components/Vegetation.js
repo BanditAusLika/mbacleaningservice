@@ -1,7 +1,7 @@
 import React from 'react';
-import './VegetationServices.css';
+import './Services.css';
 
-const VegetationServices = () => {
+function VegetationServices() {
   return (
     <section id="vegetation-services-section">
       <h2>Vegetation Services</h2>
@@ -16,6 +16,6 @@ const VegetationServices = () => {
       </ul>
     </section>
   );
-};
+}
 
 export default VegetationServices;

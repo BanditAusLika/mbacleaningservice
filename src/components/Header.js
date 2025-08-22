@@ -1,38 +1,23 @@
 import React from 'react';
-import { Link } from 'react-scroll';
 import './Header.css';
 
 const Header = () => {
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <Link to="about-section" smooth={true} duration={500}>
-              About Us
-            </Link>
-          </li>
-          <li>
-            <Link to="cleaning-services-section" smooth={true} duration={500}>
-              Cleaning Services
-            </Link>
-          </li>
-          <li>
-            <Link to="vegetation-services-section" smooth={true} duration={500}>
-              Vegetation Services
-            </Link>
-          </li>
-          <li>
-            <Link to="gallery-section" smooth={true} duration={500}>
-              Gallery
-            </Link>
-          </li>
-          <li>
-            <Link to="contact-section" smooth={true} duration={500}>
-              Contact
-            </Link>
-          </li>
-        </ul>
+    <header className="header-container">
+      <nav className="navbar">
+        <button onClick={() => scrollToSection('about-section')}>About Us</button>
+        <button onClick={() => scrollToSection('cleaning-services-section')}>Cleaning Services</button>
+        <button onClick={() => scrollToSection('vegetation-services-section')}>Vegetation Services</button>
+        <button onClick={() => scrollToSection('gallery-section')}>Gallery</button>
+        <button onClick={() => scrollToSection('reviews-section')}>Reviews</button>
+        <button onClick={() => scrollToSection('contact-section')}>Contact</button>
       </nav>
     </header>
   );

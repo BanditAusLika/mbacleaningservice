@@ -1,131 +1,92 @@
-/* Variables for consistent theming */
-:root {
-  --font-family: 'Old Standard TT', serif;
-  --code-font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-  --background-color: #111;
-  --text-color: #fff;
-  --primary-color: #00aaff;
-  --secondary-color: #ffaa00;
-}
-
-/* Global Styles */
+/* Reset and base styling */
 body {
   margin: 0;
-  font-family: var(--font-family);
-  background-color: var(--background-color);
-  color: var(--text-color);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Orbitron', sans-serif;
+  background-color: #121212;
+  color: #f0f0f0;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
-code {
-  font-family: var(--code-font-family);
+.App {
+  padding-top: 80px; /* Accounts for fixed header height */
 }
 
-/* Logo Section */
-#logo-section {
-  text-align: center;
-  margin: 20px 0;
+/* Glow on hover — excluded for gallery */
+a:hover,
+button:hover,
+h1:hover:not(.gallery-title),
+h2:hover:not(.gallery-title),
+h3:hover,
+h4:hover,
+h5:hover,
+h6:hover,
+li:hover,
+.logo-container:hover,
+.nav button:hover,
+footer:hover,
+section:hover:not(.gallery-container) {
+  filter: brightness(1.3);
+  transition: filter 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 12px #00f7ff;
 }
 
-/* Section Styling */
+/* Section layout and alignment */
 section {
-  padding: 40px 20px;
+  padding: 60px 5%;
   text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Title Styling */
-h2 {
-  font-size: 2rem;
-  color: var(--primary-color);
-  margin-bottom: 20px;
+.welcome-section {
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
-/* Paragraph Styling */
-p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: var(--text-color);
-  margin-bottom: 20px;
+.contact-container {
+  padding-bottom: 100px;
 }
 
-/* Navigation Styling */
-nav {
-  background-color: var(--background-color);
-}
-
-nav ul {
-  list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 10px 0;
-  margin: 0;
-}
-
-nav ul li {
-  margin: 5px 15px;
-}
-
-nav ul li a {
-  color: var(--primary-color);
-  text-decoration: none;
-  font-size: 1.2rem;
-  transition: color 0.3s ease-in-out;
-}
-
-nav ul li a:hover {
-  color: var(--secondary-color);
-}
-
-/* Contact Section */
-.contact-info {
+.footer {
   text-align: center;
-  margin: 20px 0;
-}
-
-.contact-info i {
-  margin-right: 10px;
-}
-
-/* Footer Styling */
-footer {
-  background-color: var(--background-color);
   padding: 20px 0;
-  text-align: center;
+  background-color: #0f0f0f;
+  font-size: 0.9rem;
 }
 
-footer a {
-  font-size: 1.5rem;
-  color: var(--secondary-color);
-  text-decoration: none;
-  transition: color 0.3s ease-in-out;
+/* Typography */
+h1 {
+  font-size: 2.2rem;
+}
+h2 {
+  font-size: 1.8rem;
+}
+p,
+li {
+  font-size: 1rem;
 }
 
-footer a:hover {
-  color: var(--primary-color);
-}
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .App {
+    padding-top: 60px;
+  }
 
-/* Responsive Design */
-@media (min-width: 768px) {
-  #logo-section img {
-    width: 400px;
+  h1 {
+    font-size: 1.6rem;
   }
 
   h2 {
-    font-size: 2.5rem;
+    font-size: 1.3rem;
   }
 
-  p {
-    font-size: 1.4rem;
+  p,
+  li {
+    font-size: 0.95rem;
   }
 
-  nav ul li a {
-    font-size: 1.5rem;
-  }
-
-  footer a {
-    font-size: 2rem;
+  section {
+    padding: 40px 5%;
   }
 }

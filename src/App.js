@@ -6,7 +6,7 @@ import About from './components/About';
 import CleaningServices from './components/CleaningServices';
 import VegetationServices from './components/VegetationServices';
 import Gallery from './components/Gallery';
-import Reviews from './components/Reviews'; // Reviews component imported
+import Reviews from './components/Reviews';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -14,14 +14,10 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <main>
-        {/* Logo Section */}
-        <section id="logo-section">
-          <Logo />
-        </section>
+      <Logo />
 
-        {/* Welcome Section */}
-        <section id="welcome-section">
+      <main>
+        <section id="welcome-section" className="welcome-section">
           <h2>Welcome to MBA Cleaning and Vegetation Services</h2>
           <p>
             We provide professional cleaning and vegetation management services across Melbourne, Victoria, Australia.
@@ -31,24 +27,31 @@ function App() {
           </p>
         </section>
 
-        {/* About Section */}
-        <About />
+        <section id="about-section">
+          <About />
+        </section>
 
-        {/* Cleaning Services Section */}
-        <CleaningServices />
+        <section id="cleaning-services-section">
+          <CleaningServices />
+        </section>
 
-        {/* Vegetation Services Section */}
-        <VegetationServices />
+        <section id="vegetation-services-section">
+          <VegetationServices />
+        </section>
 
-        {/* Gallery Section */}
-        <Gallery />
+        <section id="gallery-section">
+          <Gallery />
+        </section>
 
-        {/* Reviews Section (Newly Added) */}
-        <Reviews />  {/* The reviews section will display here */}
+        <section id="reviews-section">
+          <Reviews />
+        </section>
 
-        {/* Contact Section */}
-        <Contact />
+        <section id="contact-section">
+          <Contact />
+        </section>
       </main>
+
       <Footer />
     </div>
   );

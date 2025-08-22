@@ -1,21 +1,22 @@
 import React from 'react';
-import './VegetationServices.css';
+import './Services.css';
 
-const VegetationServices = () => {
+function VegetationServices() {
   return (
-    <section id="vegetation-services-section" className="services-container">
+    <section id="services">
       <h2>Vegetation Services</h2>
-      <ul className="services-list">
-        <li>Lawn Mowing</li>
-        <li>Brush Cutting</li>
-        <li>Herbicide Application</li>
-        <li>Tree Lopping</li>
-        <li>Garden Maintenance</li>
-        <li>Edge Trimming</li>
-        <li>Hand Weeding</li>
+      <ul>
+        <li>Precision Lawn Mowing for Residential and Commercial Areas</li>
+        <li>Heavy-Duty Brush Cutting and Overgrowth Clearance</li>
+        <li>Safe and Effective Herbicide Application</li>
+        <li>Tree Lopping, Pruning & Small Tree Removal</li>
+        <li>Full-Service Garden Maintenance & Seasonal Upkeep</li>
+        <li>Clean and Sharp Edge Trimming</li>
+        <li>Manual Hand Weeding for Sensitive Areas</li>
+        <li>Green Waste Removal and Disposal Upon Request</li>
       </ul>
     </section>
   );
-};
+}
 
 export default VegetationServices;

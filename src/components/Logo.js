@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import './Logo.css';
 
-function Logo() {
+const Logo = () => {
   const [isEnlarged, setIsEnlarged] = useState(false);
 
-  const handleLogoClick = () => {
+  const toggleLogoSize = () => {
     setIsEnlarged(!isEnlarged);
   };
 
   return (
-    <img
-      src={`${process.env.PUBLIC_URL}/logo.jpg`}
-      alt="Company Logo"
-      className={`centered-logo ${isEnlarged ? 'enlarged' : ''}`}
-      onClick={handleLogoClick}
-    />
+    <div className="logo-wrapper" onClick={toggleLogoSize}>
+      <img
+        src="/logo.jpg"
+        alt="MBA Cleaning Logo"
+        className={`main-logo ${isEnlarged ? 'enlarged' : ''}`}
+      />
+    </div>
   );
-}
+};
 
 export default Logo;
