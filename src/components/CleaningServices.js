@@ -3,9 +3,9 @@ import './CleaningServices.css';
 
 const CleaningServices = () => {
   return (
-    <div className="cleaning-container">
+    <div className="services-section">
       <h2>Cleaning Services</h2>
-      <ul>
+      <ul className="services-list">
         <li>Office and Commercial Cleaning</li>
         <li>Residential Cleaning for Homes and Apartments</li>
         <li>Window and Glass Surface Cleaning</li>

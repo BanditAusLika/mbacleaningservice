@@ -1,3 +1,5 @@
+// src/App.js
+
 import React from 'react';
 import './App.css';
 import Header from './components/Header';
@@ -5,7 +7,7 @@ import Logo from './components/Logo';
 import About from './components/About';
 import CleaningServices from './components/CleaningServices';
 import VegetationServices from './components/VegetationServices';
-import Gallery from './components/Gallery';
+import Gallery from './components/Gallery/Gallery';
 import Reviews from './components/Reviews';
 import Contact from './components/Contact';
 import Footer from './components/Footer';

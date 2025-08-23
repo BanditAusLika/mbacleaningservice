@@ -1,9 +1,9 @@
 import React from 'react';
-import './Services.css';
+import './VegetationServices.css';
 
-function VegetationServices() {
+const VegetationServices = () => {
   return (
-    <section id="services">
+    <div className="vegetation-section">
       <h2>Vegetation Services</h2>
       <ul>
         <li>Precision Lawn Mowing for Residential and Commercial Areas</li>
@@ -15,8 +15,8 @@ function VegetationServices() {
         <li>Manual Hand Weeding for Sensitive Areas</li>
         <li>Green Waste Removal and Disposal Upon Request</li>
       </ul>
-    </section>
+    </div>
   );
-}
+};
 
 export default VegetationServices;

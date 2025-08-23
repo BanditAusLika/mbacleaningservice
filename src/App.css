@@ -1,92 +1,127 @@
-/* Reset and base styling */
+/* === GLOBAL BASE STYLE === */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
-  margin: 0;
   font-family: 'Orbitron', sans-serif;
   background-color: #121212;
-  color: #f0f0f0;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
+  color: #EAEAEA;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
 }
 
-.App {
-  padding-top: 80px; /* Accounts for fixed header height */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: 1.2px;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-/* Glow on hover — excluded for gallery */
-a:hover,
-button:hover,
-h1:hover:not(.gallery-title),
-h2:hover:not(.gallery-title),
-h3:hover,
-h4:hover,
-h5:hover,
-h6:hover,
-li:hover,
-.logo-container:hover,
-.nav button:hover,
-footer:hover,
-section:hover:not(.gallery-container) {
-  filter: brightness(1.3);
-  transition: filter 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 12px #00f7ff;
+p, li {
+  font-size: 1.1rem;
+  max-width: 75ch;
 }
 
-/* Section layout and alignment */
-section {
-  padding: 60px 5%;
+/* === APP SECTIONS === */
+
+.about-section,
+.services-section,
+.gallery-section,
+.reviews-section,
+.contact-section,
+.welcome-section,
+.vegetation-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1.5rem;
   text-align: center;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
-.welcome-section {
-  padding-top: 40px;
-  padding-bottom: 40px;
+/* Welcome Section */
+.welcome-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
 
-.contact-container {
-  padding-bottom: 100px;
+.welcome-section p {
+  font-size: 1.2rem;
+  max-width: 800px;
 }
 
-.footer {
-  text-align: center;
-  padding: 20px 0;
-  background-color: #0f0f0f;
-  font-size: 0.9rem;
-}
+/* === MEDIA QUERIES === */
 
-/* Typography */
-h1 {
-  font-size: 2.2rem;
-}
-h2 {
-  font-size: 1.8rem;
-}
-p,
-li {
-  font-size: 1rem;
-}
-
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
-  .App {
-    padding-top: 60px;
-  }
-
+@media (max-width: 768px) {
   h1 {
-    font-size: 1.6rem;
+    font-size: 2.2rem;
   }
 
   h2 {
-    font-size: 1.3rem;
+    font-size: 1.8rem;
   }
 
-  p,
-  li {
-    font-size: 0.95rem;
+  p, li {
+    font-size: 1rem;
   }
+}
 
-  section {
-    padding: 40px 5%;
-  }
+/* === CLEANING SERVICES === */
+
+.services-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+.services-section li {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  line-height: 1.5;
+  color: #fff;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+/* === VEGETATION SERVICES === */
+
+.vegetation-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+.vegetation-section li {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  line-height: 1.5;
+  color: #fff;
+  text-shadow: 0 0 5px #00ffcc;
+}
+
+/* === FOOTER CENTERING === */
+
+.footer {
+  width: 100%;
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #1a1a1a;
+  color: #eaeaea;
+  font-size: 1rem;
+  border-top: 1px solid #333;
+}
+
+.footer p,
+.footer a {
+  margin: 0.2rem 0;
+  color: #00ffff;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
 }
