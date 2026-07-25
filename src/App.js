@@ -608,7 +608,8 @@ function HomePage() {
 
 function App() {
   const path = window.location.pathname.replace(/\/+$/, '') || '/';
-  return path === '/gallery' ? <GalleryPage /> : <HomePage />;
+  const isGalleryPage = path === '/gallery' || path === '/gallery/index.html';
+  return isGalleryPage ? <GalleryPage /> : <HomePage />;
 }
 
 export default App;
