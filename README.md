@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# MBA Cleaning and Vegetation Services
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Production website for MBA Cleaning and Vegetation Services, Melbourne.
+
+## Contact form
+
+The quote form posts securely to FormSubmit and routes enquiries to `info@mbacleaningservice.com`. The mailbox owner must confirm FormSubmit's one-time activation email after the first submission.
 
 ## Available Scripts
 
