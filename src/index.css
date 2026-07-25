@@ -1,75 +1,63 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
 
 :root {
-  --navy: #07182d;
-  --navy-2: #0b2440;
-  --blue: #0a68c7;
-  --blue-bright: #1689ee;
-  --red: #d9332d;
-  --green: #168354;
-  --ink: #10243a;
-  --muted: #607084;
-  --line: #dce4ec;
+  --black: #111214;
+  --coal: #1a1c20;
+  --graphite: #282b31;
+  --red: #c81018;
+  --red-dark: #970b11;
+  --red-soft: #fff0f1;
+  --ink: #17191d;
+  --muted: #62666e;
+  --line: #e4e5e7;
   --paper: #ffffff;
-  --mist: #f4f7fa;
+  --warm: #f7f6f3;
+  --radius-sm: 12px;
   --radius: 24px;
-  --shadow: 0 20px 60px rgba(7, 24, 45, 0.12);
+  --radius-lg: 36px;
+  --shadow-sm: 0 14px 40px rgba(17, 18, 20, 0.08);
+  --shadow: 0 30px 90px rgba(17, 18, 20, 0.14);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 94px;
+  scroll-padding-top: 100px;
 }
 
 body {
-  margin: 0;
   min-width: 320px;
+  margin: 0;
   color: var(--ink);
   background: var(--paper);
-  font-family: 'Manrope', sans-serif;
-  line-height: 1.6;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 button,
 input,
 select,
-textarea {
-  font: inherit;
-}
+textarea { font: inherit; }
 
 button,
-a {
-  -webkit-tap-highlight-color: transparent;
-}
+a { -webkit-tap-highlight-color: transparent; }
 
-a {
-  color: inherit;
-}
+a { color: inherit; }
+img { display: block; max-width: 100%; }
 
-img {
-  display: block;
-  max-width: 100%;
-}
-
-::selection {
-  color: white;
-  background: var(--blue);
-}
+::selection { color: #fff; background: var(--red); }
 
 :focus-visible {
-  outline: 3px solid #67b8ff;
-  outline-offset: 3px;
+  outline: 3px solid #f35f65;
+  outline-offset: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;

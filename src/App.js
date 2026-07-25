@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   FaArrowRight,
   FaBars,
   FaBuilding,
   FaCheck,
+  FaChevronLeft,
+  FaChevronRight,
   FaEnvelope,
   FaFacebookF,
+  FaHome,
   FaInstagram,
   FaLeaf,
   FaMapMarkerAlt,
   FaPhoneAlt,
   FaQuoteLeft,
-  FaRegClock,
+  FaRegCalendarCheck,
   FaShieldAlt,
-  FaMagic,
   FaTimes,
   FaTools,
   FaWater,
@@ -31,71 +33,81 @@ const CONTACT = {
 const navItems = [
   ['Services', 'services'],
   ['Why MBA', 'why-mba'],
-  ['Our work', 'gallery'],
+  ['Our work', 'projects'],
   ['Reviews', 'reviews'],
   ['Contact', 'contact'],
 ];
 
-const cleaningServices = [
-  'Office and commercial cleaning',
-  'Residential homes and apartments',
-  'Window and glass cleaning',
-  'High-pressure exterior washing',
-  'Carpet and upholstery steam cleaning',
-  'Restaurants, bars and hospitality venues',
-  'Strata and common-area cleaning',
-  'Post-construction and builders cleans',
-];
-
-const vegetationServices = [
-  'Residential and commercial lawn mowing',
-  'Brush cutting and overgrowth clearance',
-  'Garden and seasonal maintenance',
-  'Tree pruning and small-tree removal',
-  'Edge trimming and detailed hand weeding',
-  'Green-waste removal on request',
-];
-
-const serviceHighlights = [
+const serviceGroups = [
   {
+    id: 'commercial',
+    label: 'Commercial',
     icon: FaBuilding,
-    eyebrow: 'Commercial',
-    title: 'Workplaces kept client-ready',
-    text: 'Dependable cleaning for offices, retail, gyms, hospitality, strata and commercial facilities—with schedules built around your operation.',
-    image: '/images/gallery/30.jpg',
-    alt: 'Commercial facility cleaned by MBA Cleaning Services',
+    kicker: 'Reliable facility presentation',
+    title: 'Cleaning that works around your operation.',
+    text: 'Planned cleaning and specialist project work for offices, retail, hospitality, gyms, strata and commercial facilities. We tailor the scope and timing to the way your site actually runs.',
+    image: '/images/gallery/50.jpg',
+    imageAlt: 'MBA Cleaning Services cleaning a large commercial facility floor',
+    services: [
+      'Office and workplace cleaning',
+      'Retail, hospitality and gym cleaning',
+      'Strata and common-area maintenance',
+      'Post-construction and builders cleans',
+      'Commercial floors and pressure washing',
+      'One-off projects or recurring schedules',
+    ],
   },
   {
-    icon: FaMagic,
-    eyebrow: 'Specialist cleaning',
-    title: 'Detailed work that shows',
-    text: 'From deep cleans and steam cleaning to high-pressure washing and post-construction handover, we focus on a finish you can see.',
-    image: '/images/gallery/40.jpg',
-    alt: 'MBA team member completing elevated exterior window cleaning',
+    id: 'residential',
+    label: 'Residential',
+    icon: FaHome,
+    kicker: 'Detailed care for your home',
+    title: 'A cleaner home without losing your time.',
+    text: 'Flexible home cleaning for busy households, apartments, move-related cleans and detailed one-off work. Tell us what matters most and we will shape the service around your property.',
+    image: '/images/gallery/1.jpg',
+    imageAlt: 'Freshly detailed bathroom completed by MBA Cleaning Services',
+    services: [
+      'Regular home and apartment cleaning',
+      'Deep and detail cleaning',
+      'Window and glass cleaning',
+      'Carpet and upholstery steam cleaning',
+      'Move-in and move-out cleaning',
+      'Outdoor surface pressure washing',
+    ],
   },
   {
+    id: 'grounds',
+    label: 'Grounds',
     icon: FaLeaf,
-    eyebrow: 'Grounds care',
-    title: 'Outdoor spaces under control',
-    text: 'Practical vegetation and garden maintenance for homes, businesses and larger sites, including overgrowth clearance and green-waste removal.',
+    kicker: 'Practical outdoor maintenance',
+    title: 'Grounds kept safe, neat and under control.',
+    text: 'Vegetation and garden services for residential, commercial and larger properties. MBA can coordinate inside and outside work through one dependable point of contact.',
     image: '/images/gallery/veg2.jpg',
-    alt: 'Before and after vegetation maintenance by MBA Cleaning Services',
+    imageAlt: 'Before and after vegetation maintenance completed by MBA',
+    services: [
+      'Lawn mowing and edge trimming',
+      'Brush cutting and overgrowth clearance',
+      'Garden and seasonal maintenance',
+      'Tree pruning and small-tree removal',
+      'Detailed hand weeding',
+      'Green-waste removal on request',
+    ],
   },
 ];
 
-const featuredGallery = [
-  { src: '/images/gallery/1.jpg', alt: 'Freshly detailed bathroom and vanity' },
-  { src: '/images/gallery/10.jpg', alt: 'High-pressure commercial surface cleaning' },
-  { src: '/images/gallery/20.jpg', alt: 'Commercial floor polishing in progress' },
-  { src: '/images/gallery/30.jpg', alt: 'Freshly cleaned commercial carpet' },
-  { src: '/images/gallery/40.jpg', alt: 'Elevated exterior window cleaning' },
-  { src: '/images/gallery/50.jpg', alt: 'Large commercial floor cleaning project' },
-  { src: '/images/gallery/45.jpg', alt: 'Recent MBA cleaning project' },
-  { src: '/images/gallery/55.jpg', alt: 'Professional cleaning result' },
-  { src: '/images/gallery/veg1.jpg', alt: 'Vegetation maintenance project' },
-  { src: '/images/gallery/veg2.jpg', alt: 'Vegetation maintenance before and after' },
-  { src: '/images/gallery/veg3.jpg', alt: 'Grounds maintenance completed by MBA' },
-  { src: '/images/gallery/veg4.jpg', alt: 'Outdoor maintenance project' },
+const galleryItems = [
+  { src: '/images/gallery/50.jpg', alt: 'Large commercial floor cleaning project', category: 'Commercial' },
+  { src: '/images/gallery/40.jpg', alt: 'Elevated exterior window cleaning', category: 'Specialist' },
+  { src: '/images/gallery/1.jpg', alt: 'Detailed bathroom cleaning result', category: 'Residential' },
+  { src: '/images/gallery/20.jpg', alt: 'Commercial floor polishing in progress', category: 'Commercial' },
+  { src: '/images/gallery/10.jpg', alt: 'High-pressure surface cleaning', category: 'Specialist' },
+  { src: '/images/gallery/30.jpg', alt: 'Commercial carpet cleaning result', category: 'Commercial' },
+  { src: '/images/gallery/45.jpg', alt: 'Recent detailed cleaning project', category: 'Residential' },
+  { src: '/images/gallery/55.jpg', alt: 'Professional property cleaning result', category: 'Residential' },
+  { src: '/images/gallery/veg1.jpg', alt: 'Vegetation maintenance project', category: 'Grounds' },
+  { src: '/images/gallery/veg2.jpg', alt: 'Vegetation maintenance before and after', category: 'Grounds' },
+  { src: '/images/gallery/veg3.jpg', alt: 'Grounds maintenance completed by MBA', category: 'Grounds' },
+  { src: '/images/gallery/veg4.jpg', alt: 'Outdoor property maintenance project', category: 'Grounds' },
 ];
 
 const reviews = [
@@ -133,26 +145,30 @@ const reviews = [
 
 const faqs = [
   {
-    question: 'Do you provide both one-off and recurring cleaning?',
-    answer: 'Yes. MBA can quote one-off deep cleans, end-of-project work and recurring residential or commercial schedules. Tell us what you need and we will recommend a practical service frequency.',
+    question: 'Do you provide both one-off and recurring services?',
+    answer: 'Yes. MBA can quote one-off deep cleans, project and handover work, plus recurring residential, commercial and grounds-maintenance schedules.',
+  },
+  {
+    question: 'Can you work around business operating hours?',
+    answer: 'Yes. We discuss site access, preferred timing and operational requirements before confirming the schedule so the service causes minimal disruption.',
   },
   {
     question: 'Can cleaning and vegetation work be arranged together?',
-    answer: 'Yes. One team can coordinate indoor cleaning and outdoor vegetation or garden maintenance, making property upkeep easier to schedule and manage.',
+    answer: 'Yes. MBA can coordinate internal cleaning and external vegetation or garden maintenance through one point of contact.',
   },
   {
     question: 'Which areas do you service?',
-    answer: 'MBA is based in Deer Park and services metropolitan Melbourne, with Victoria-wide work considered depending on the scope and schedule.',
+    answer: 'MBA is based in Deer Park and services metropolitan Melbourne. Broader Victorian work can be considered depending on the scope and schedule.',
   },
   {
-    question: 'How do I get a quote?',
-    answer: 'Call 0415 081 517 or complete the quote form. Include the property type, suburb, service required and preferred timing so we can respond with the right questions and next step.',
+    question: 'How do I get an accurate quote?',
+    answer: 'Call 0415 081 517 or complete the quote form with the property type, suburb, service, preferred timing and relevant details. We will follow up with any questions required to confirm the scope.',
   },
 ];
 
-function LogoButton({ className = '', label = 'Enlarge MBA Cleaning Services logo', onOpen }) {
+function LogoButton({ className = '', onOpen }) {
   return (
-    <button className={`logo-button ${className}`} type="button" onClick={onOpen} aria-label={label}>
+    <button className={`logo-button ${className}`} type="button" onClick={onOpen} aria-label="Enlarge MBA Cleaning Services logo">
       <img src="/logo.jpg" alt="MBA Cleaning Services" />
     </button>
   );
@@ -161,11 +177,27 @@ function LogoButton({ className = '', label = 'Enlarge MBA Cleaning Services log
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [logoOpen, setLogoOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [activeService, setActiveService] = useState('commercial');
+  const [galleryFilter, setGalleryFilter] = useState('All');
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+
+  const activeServiceData = serviceGroups.find((item) => item.id === activeService) || serviceGroups[0];
+  const filteredGallery = useMemo(
+    () => galleryItems.filter((item) => galleryFilter === 'All' || item.category === galleryFilter),
+    [galleryFilter],
+  );
+  const selectedImage = selectedImageIndex === null ? null : filteredGallery[selectedImageIndex];
 
   const closeOverlays = () => {
     setLogoOpen(false);
-    setSelectedImage(null);
+    setSelectedImageIndex(null);
+  };
+
+  const moveGallery = (direction) => {
+    setSelectedImageIndex((current) => {
+      if (current === null) return null;
+      return (current + direction + filteredGallery.length) % filteredGallery.length;
+    });
   };
 
   useEffect(() => {
@@ -174,20 +206,20 @@ function App() {
         closeOverlays();
         setMenuOpen(false);
       }
+      if (selectedImageIndex !== null && event.key === 'ArrowLeft') moveGallery(-1);
+      if (selectedImageIndex !== null && event.key === 'ArrowRight') moveGallery(1);
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, []);
+  }, [selectedImageIndex, filteredGallery.length]);
 
   useEffect(() => {
-    const isModalOpen = logoOpen || Boolean(selectedImage);
-    document.body.style.overflow = isModalOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [logoOpen, selectedImage]);
+    const overlayOpen = logoOpen || selectedImageIndex !== null;
+    document.body.style.overflow = overlayOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [logoOpen, selectedImageIndex]);
 
-  const handleNav = () => setMenuOpen(false);
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <div className="site-shell">
@@ -195,19 +227,19 @@ function App() {
 
       <div className="utility-bar">
         <div className="container utility-inner">
-          <span><FaMapMarkerAlt aria-hidden="true" /> Melbourne &amp; Victoria</span>
-          <a href={CONTACT.phoneHref}><FaPhoneAlt aria-hidden="true" /> {CONTACT.phoneDisplay}</a>
+          <span><FaMapMarkerAlt aria-hidden="true" /> Deer Park · Melbourne-wide service</span>
+          <div>
+            <a href={`mailto:${CONTACT.email}`}><FaEnvelope aria-hidden="true" /> {CONTACT.email}</a>
+            <a href={CONTACT.phoneHref}><FaPhoneAlt aria-hidden="true" /> {CONTACT.phoneDisplay}</a>
+          </div>
         </div>
       </div>
 
       <header className="site-header">
         <div className="container header-inner">
-          <a className="brand" href="#top" aria-label="MBA Cleaning Services home" onClick={handleNav}>
+          <a className="brand" href="#top" aria-label="MBA Cleaning Services home" onClick={closeMenu}>
             <img src="/logo.jpg" alt="" />
-            <span>
-              <strong>MBA</strong>
-              <small>Cleaning &amp; Vegetation</small>
-            </span>
+            <span><strong>MBA</strong><small>Cleaning &amp; Vegetation</small></span>
           </a>
 
           <button
@@ -222,151 +254,168 @@ function App() {
           </button>
 
           <nav id="primary-navigation" className={menuOpen ? 'primary-nav is-open' : 'primary-nav'} aria-label="Primary navigation">
-            {navItems.map(([label, id]) => (
-              <a key={id} href={`#${id}`} onClick={handleNav}>{label}</a>
-            ))}
-            <a className="nav-cta" href="#quote" onClick={handleNav}>Free quote</a>
+            {navItems.map(([label, id]) => <a key={id} href={`#${id}`} onClick={closeMenu}>{label}</a>)}
+            <a className="nav-cta" href="#quote" onClick={closeMenu}>Request a quote <FaArrowRight aria-hidden="true" /></a>
           </nav>
         </div>
       </header>
 
       <main id="main-content">
         <section className="hero" id="top">
-          <div className="hero-pattern" aria-hidden="true" />
+          <div className="hero-ambient" aria-hidden="true" />
           <div className="container hero-grid">
             <div className="hero-copy">
-              <div className="eyebrow"><span /> Family-owned. Melbourne-based.</div>
-              <h1>Immaculate spaces.<br /><span>Professionally maintained.</span></h1>
-              <p className="hero-lead">
-                Commercial and residential cleaning, specialist deep cleaning and vegetation management—delivered by one reliable local team.
-              </p>
+              <p className="eyebrow"><span /> Melbourne cleaning &amp; grounds specialists</p>
+              <h1>Professional care for <em>every part</em> of your property.</h1>
+              <p className="hero-lead">Commercial and residential cleaning, specialist surface work and vegetation maintenance—coordinated through one responsive local team.</p>
               <div className="hero-actions">
                 <a className="button button-primary" href="#quote">Request a free quote <FaArrowRight aria-hidden="true" /></a>
-                <a className="button button-secondary" href={CONTACT.phoneHref}><FaPhoneAlt aria-hidden="true" /> Call {CONTACT.phoneDisplay}</a>
+                <a className="button button-secondary" href={CONTACT.phoneHref}><FaPhoneAlt aria-hidden="true" /> {CONTACT.phoneDisplay}</a>
               </div>
-              <div className="hero-proof" aria-label="Service highlights">
-                <span><FaCheck aria-hidden="true" /> Flexible scheduling</span>
-                <span><FaCheck aria-hidden="true" /> Residential &amp; commercial</span>
-                <span><FaCheck aria-hidden="true" /> Melbourne-wide service</span>
+              <div className="hero-proof" aria-label="MBA service strengths">
+                <span><FaCheck aria-hidden="true" /><strong>Clear quotes</strong></span>
+                <span><FaCheck aria-hidden="true" /><strong>Flexible schedules</strong></span>
+                <span><FaCheck aria-hidden="true" /><strong>Melbourne-wide</strong></span>
               </div>
             </div>
 
-            <div className="hero-visual">
-              <img className="hero-photo" src="/images/gallery/50.jpg" alt="MBA Cleaning Services completing a large commercial floor-cleaning project" />
-              <div className="hero-photo-overlay" />
-              <LogoButton className="hero-logo" onOpen={() => setLogoOpen(true)} />
-              <div className="hero-note">
-                <FaRegClock aria-hidden="true" />
-                <span><strong>Responsive service</strong><small>Clear communication from quote to completion</small></span>
+            <div className="hero-showcase">
+              <div className="hero-image-frame">
+                <img src="/images/gallery/50.jpg" alt="MBA Cleaning Services completing a commercial floor cleaning project" />
+                <span className="hero-image-label">Commercial project work</span>
+              </div>
+              <div className="hero-logo-panel">
+                <LogoButton onOpen={() => setLogoOpen(true)} />
+                <p>Click to view our logo</p>
+              </div>
+              <div className="hero-contact-card">
+                <FaRegCalendarCheck aria-hidden="true" />
+                <span><small>Need a reliable team?</small><strong>Let’s discuss the scope.</strong></span>
+                <a href="#quote" aria-label="Request an MBA quote"><FaArrowRight aria-hidden="true" /></a>
               </div>
             </div>
           </div>
-        </section>
-
-        <section className="trust-strip" aria-label="MBA service strengths">
-          <div className="container trust-grid">
-            <div><FaShieldAlt aria-hidden="true" /><span><strong>Trusted local team</strong><small>Family-owned Australian business</small></span></div>
-            <div><FaTools aria-hidden="true" /><span><strong>Built for demanding work</strong><small>Homes, offices, hospitality and facilities</small></span></div>
-            <div><FaWater aria-hidden="true" /><span><strong>Complete property care</strong><small>Cleaning, exteriors and grounds</small></span></div>
+          <div className="hero-client-bar">
+            <div className="container">
+              <span>Trusted across workplaces and community spaces</span>
+              <div><strong>BodyPower Gym</strong><strong>Chiba</strong><strong>Centrogen</strong><strong>Eurohub</strong><strong>Saint Petka</strong></div>
+            </div>
           </div>
         </section>
 
         <section className="section services" id="services">
           <div className="container">
             <div className="section-heading split-heading">
-              <div>
-                <span className="section-kicker">Complete property care</span>
-                <h2>One capable team.<br />Every space covered.</h2>
-              </div>
-              <p>From daily presentation to demanding one-off projects, MBA combines detailed cleaning with practical outdoor maintenance.</p>
+              <div><span className="section-kicker">Property care, properly coordinated</span><h2>Choose the service pathway that fits your site.</h2></div>
+              <p>Start with your property type. MBA can then tailor the scope, frequency and timing around the outcome you need.</p>
             </div>
 
-            <div className="highlight-grid">
-              {serviceHighlights.map(({ icon: Icon, eyebrow, title, text, image, alt }) => (
-                <article className="highlight-card" key={title}>
-                  <div className="highlight-image-wrap"><img src={image} alt={alt} loading="lazy" /></div>
-                  <div className="highlight-content">
-                    <span className="card-icon"><Icon aria-hidden="true" /></span>
-                    <small>{eyebrow}</small>
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                    <a href="#quote">Discuss this service <FaArrowRight aria-hidden="true" /></a>
-                  </div>
-                </article>
+            <div className="service-switcher" role="tablist" aria-label="MBA service categories">
+              {serviceGroups.map(({ id, label, icon: Icon }) => (
+                <button
+                  key={id}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeService === id}
+                  aria-controls="service-panel"
+                  className={activeService === id ? 'is-active' : ''}
+                  onClick={() => setActiveService(id)}
+                >
+                  <Icon aria-hidden="true" /><span>{label}</span>
+                </button>
               ))}
             </div>
 
-            <div className="service-lists">
-              <div className="service-list-card">
-                <div className="list-heading"><FaMagic aria-hidden="true" /><div><small>Indoor &amp; exterior</small><h3>Cleaning services</h3></div></div>
-                <ul>{cleaningServices.map((service) => <li key={service}><FaCheck aria-hidden="true" /> {service}</li>)}</ul>
+            <article className="service-panel" id="service-panel" role="tabpanel">
+              <div className="service-panel-image">
+                <img src={activeServiceData.image} alt={activeServiceData.imageAlt} />
+                <span>{activeServiceData.label} services</span>
               </div>
-              <div className="service-list-card service-list-card-green">
-                <div className="list-heading"><FaLeaf aria-hidden="true" /><div><small>Gardens &amp; grounds</small><h3>Vegetation services</h3></div></div>
-                <ul>{vegetationServices.map((service) => <li key={service}><FaCheck aria-hidden="true" /> {service}</li>)}</ul>
+              <div className="service-panel-copy">
+                <span className="section-kicker">{activeServiceData.kicker}</span>
+                <h3>{activeServiceData.title}</h3>
+                <p>{activeServiceData.text}</p>
+                <ul>{activeServiceData.services.map((service) => <li key={service}><FaCheck aria-hidden="true" /> {service}</li>)}</ul>
+                <a className="text-link" href="#quote">Get a tailored {activeServiceData.label.toLowerCase()} quote <FaArrowRight aria-hidden="true" /></a>
               </div>
+            </article>
+
+            <div className="specialist-strip">
+              <div><FaWater aria-hidden="true" /><span><strong>Pressure washing</strong><small>Hard surfaces and exterior areas</small></span></div>
+              <div><FaTools aria-hidden="true" /><span><strong>Post-construction</strong><small>Detailed handover cleaning</small></span></div>
+              <div><FaShieldAlt aria-hidden="true" /><span><strong>Steam cleaning</strong><small>Carpets and upholstery</small></span></div>
+              <a href="#quote">Discuss specialist work <FaArrowRight aria-hidden="true" /></a>
             </div>
           </div>
         </section>
 
         <section className="section why" id="why-mba">
           <div className="container why-grid">
-            <div className="why-images">
-              <img className="why-image-main" src="/images/gallery/40.jpg" alt="MBA team member cleaning commercial windows" loading="lazy" />
-              <img className="why-image-small" src="/images/gallery/1.jpg" alt="Detailed bathroom cleaning result" loading="lazy" />
-              <div className="experience-card"><strong>One team</strong><span>for cleaning and grounds</span></div>
+            <div className="why-media">
+              <img className="why-main" src="/images/gallery/40.jpg" alt="MBA team member completing commercial window cleaning" loading="lazy" />
+              <img className="why-detail" src="/images/gallery/1.jpg" alt="Detailed bathroom cleaning result" loading="lazy" />
+              <div className="why-badge"><strong>One team</strong><span>Indoor, exterior &amp; grounds</span></div>
             </div>
             <div className="why-copy">
-              <span className="section-kicker">Why choose MBA</span>
-              <h2>Professional standards without the corporate runaround.</h2>
-              <p>MBA Cleaning and Vegetation Services is a family-owned Australian business based in Melbourne. We bring practical experience, flexible scheduling and consistent attention to detail to every site.</p>
-              <div className="benefit-list">
-                <div><span>01</span><p><strong>Clear communication</strong>Direct, responsive contact from the first quote through to completion.</p></div>
-                <div><span>02</span><p><strong>Flexible service</strong>One-off, project-based and recurring schedules shaped around your property.</p></div>
-                <div><span>03</span><p><strong>Visible quality</strong>Careful work, professional equipment and a finish that supports your space.</p></div>
+              <span className="section-kicker">Why businesses and households choose MBA</span>
+              <h2>Professional standards. Direct local accountability.</h2>
+              <p className="why-intro">MBA Cleaning and Vegetation Services is a family-owned Australian business based in Deer Park. You receive responsive communication, practical scheduling and visible care from the first conversation to the final result.</p>
+              <div className="principles">
+                <article><span>01</span><div><h3>Scope before promises</h3><p>We clarify the property, priorities and timing so the quote reflects the work required.</p></div></article>
+                <article><span>02</span><div><h3>Service that fits the site</h3><p>One-off projects and recurring schedules can be shaped around access and operating needs.</p></div></article>
+                <article><span>03</span><div><h3>One point of contact</h3><p>Coordinate cleaning, specialist work and grounds care without juggling multiple providers.</p></div></article>
               </div>
-              <a className="text-link" href="#quote">Tell us what your property needs <FaArrowRight aria-hidden="true" /></a>
+              <a className="button button-dark" href="#quote">Plan your service <FaArrowRight aria-hidden="true" /></a>
             </div>
+          </div>
+        </section>
+
+        <section className="results-band" aria-label="MBA service promise">
+          <div className="container">
+            <div><strong>Commercial</strong><span>Presentation-ready workplaces</span></div>
+            <div><strong>Residential</strong><span>Detailed, flexible home care</span></div>
+            <div><strong>Specialist</strong><span>Surfaces, steam and handover work</span></div>
+            <div><strong>Grounds</strong><span>Practical vegetation maintenance</span></div>
           </div>
         </section>
 
         <section className="section process" aria-labelledby="process-title">
           <div className="container">
-            <div className="section-heading centered-heading">
-              <span className="section-kicker">Simple from day one</span>
-              <h2 id="process-title">A straightforward service process</h2>
-              <p>Share the job, agree on the scope, then let our team take care of the work.</p>
+            <div className="section-heading split-heading">
+              <div><span className="section-kicker">Simple from the first call</span><h2 id="process-title">A clear path from enquiry to completion.</h2></div>
+              <p>No vague hand-offs. We confirm what needs doing, agree on the scope and keep communication straightforward.</p>
             </div>
             <div className="process-grid">
               {[
-                ['01', 'Tell us what you need', 'Call or send the quote form with your property type, suburb and service requirements.'],
-                ['02', 'Receive a clear quote', 'We confirm the scope, timing and any site details needed to quote accurately.'],
-                ['03', 'Choose your schedule', 'Book a one-off visit, project clean or recurring maintenance arrangement.'],
-                ['04', 'Enjoy the result', 'We complete the agreed work carefully and keep communication clear.'],
+                ['01', 'Share the job', 'Send the property type, suburb, required service and preferred timing.'],
+                ['02', 'Confirm the scope', 'We ask the right questions and arrange a site discussion when necessary.'],
+                ['03', 'Approve the quote', 'Receive a clear service scope and schedule before work begins.'],
+                ['04', 'We take care of it', 'MBA completes the agreed work with attention to detail and clear follow-up.'],
               ].map(([number, title, text]) => (
-                <article key={number}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>
+                <article key={number}><span>{number}</span><div><h3>{title}</h3><p>{text}</p></div></article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="section gallery-section" id="gallery">
+        <section className="section projects" id="projects">
           <div className="container">
-            <div className="section-heading split-heading gallery-heading">
-              <div><span className="section-kicker">Real work. Real results.</span><h2>A closer look at our work</h2></div>
-              <p>Selected projects completed across cleaning, specialist surface work and vegetation maintenance.</p>
+            <div className="section-heading split-heading projects-heading">
+              <div><span className="section-kicker">Documented project work</span><h2>See the standard for yourself.</h2></div>
+              <p>Browse selected cleaning, specialist and grounds-maintenance work. Select any image for a closer view.</p>
+            </div>
+            <div className="gallery-filters" aria-label="Filter project gallery">
+              {['All', 'Commercial', 'Residential', 'Specialist', 'Grounds'].map((filter) => (
+                <button key={filter} type="button" className={galleryFilter === filter ? 'is-active' : ''} onClick={() => { setGalleryFilter(filter); setSelectedImageIndex(null); }}>
+                  {filter}
+                </button>
+              ))}
             </div>
             <div className="gallery-grid">
-              {featuredGallery.map((image, index) => (
-                <button
-                  type="button"
-                  className={`gallery-card gallery-card-${(index % 5) + 1}`}
-                  key={image.src}
-                  onClick={() => setSelectedImage(image)}
-                  aria-label={`Open image: ${image.alt}`}
-                >
+              {filteredGallery.map((image, index) => (
+                <button key={image.src} type="button" className="gallery-card" onClick={() => setSelectedImageIndex(index)} aria-label={`Open project image: ${image.alt}`}>
                   <img src={image.src} alt={image.alt} loading="lazy" />
-                  <span>View project</span>
+                  <span><small>{image.category}</small><strong>{image.alt}</strong><i>View <FaArrowRight aria-hidden="true" /></i></span>
                 </button>
               ))}
             </div>
@@ -377,12 +426,13 @@ function App() {
           <div className="container">
             <div className="section-heading centered-heading">
               <span className="section-kicker">Client feedback</span>
-              <h2>Trusted to keep important spaces at their best</h2>
+              <h2>Trusted where presentation matters.</h2>
+              <p>Feedback from businesses, community spaces and clients MBA has supported.</p>
             </div>
             <div className="reviews-grid">
               {reviews.map((review) => (
                 <figure className="review-card" key={`${review.name}-${review.business}`}>
-                  <FaQuoteLeft className="quote-icon" aria-hidden="true" />
+                  <div className="review-top"><FaQuoteLeft aria-hidden="true" /><span>★★★★★</span></div>
                   <blockquote>{review.text}</blockquote>
                   <figcaption><strong>{review.name}</strong><span>{review.business}</span></figcaption>
                 </figure>
@@ -391,12 +441,26 @@ function App() {
           </div>
         </section>
 
+        <section className="section service-area">
+          <div className="container service-area-grid">
+            <div>
+              <span className="section-kicker">Based in Deer Park</span>
+              <h2>Responsive service across metropolitan Melbourne.</h2>
+              <p>MBA services homes, workplaces and facilities across Melbourne. Larger or broader Victorian projects can be discussed based on scope and scheduling.</p>
+              <a className="text-link" href={CONTACT.maps} target="_blank" rel="noreferrer">View our Deer Park base <FaArrowRight aria-hidden="true" /></a>
+            </div>
+            <div className="area-list" aria-label="Selected service areas">
+              {['Deer Park', 'Sunshine', 'Brimbank', 'Melton', 'Melbourne CBD', 'Western Suburbs', 'Northern Suburbs', 'Eastern Suburbs', 'South-Eastern Suburbs'].map((area) => <span key={area}><FaMapMarkerAlt aria-hidden="true" /> {area}</span>)}
+            </div>
+          </div>
+        </section>
+
         <section className="section faq" aria-labelledby="faq-title">
           <div className="container faq-grid">
-            <div>
-              <span className="section-kicker">Common questions</span>
-              <h2 id="faq-title">Everything you need to get started</h2>
-              <p>Have a different question? Call us directly and we will help you work out the right service.</p>
+            <div className="faq-intro">
+              <span className="section-kicker">Before you book</span>
+              <h2 id="faq-title">Straight answers to common questions.</h2>
+              <p>If your job is unusual, call us. A short conversation is often the fastest way to confirm the right next step.</p>
               <a className="button button-dark" href={CONTACT.phoneHref}><FaPhoneAlt aria-hidden="true" /> {CONTACT.phoneDisplay}</a>
             </div>
             <div className="faq-list">
@@ -411,39 +475,44 @@ function App() {
         </section>
 
         <section className="contact-section" id="contact">
+          <div className="contact-backdrop" aria-hidden="true" />
           <div className="container contact-grid">
             <div className="contact-copy">
-              <span className="section-kicker light-kicker">Ready when you are</span>
-              <h2>Let’s get your property looking its best.</h2>
-              <p>Tell us what needs attention and we will respond with the right questions, a clear next step and a free estimate.</p>
+              <span className="section-kicker light-kicker">Your property. Your priorities.</span>
+              <h2>Tell us what needs attention.</h2>
+              <p>Send the essentials and MBA will respond with the right questions and a clear next step. Quotes are free and there is no obligation.</p>
               <div className="contact-methods">
-                <a href={CONTACT.phoneHref}><FaPhoneAlt aria-hidden="true" /><span><small>Call for a free estimate</small><strong>{CONTACT.phoneDisplay}</strong></span></a>
-                <a href={`mailto:${CONTACT.email}`}><FaEnvelope aria-hidden="true" /><span><small>Email MBA</small><strong>{CONTACT.email}</strong></span></a>
-                <a href={CONTACT.maps} target="_blank" rel="noreferrer"><FaMapMarkerAlt aria-hidden="true" /><span><small>Based in Deer Park</small><strong>{CONTACT.address}</strong></span></a>
+                <a href={CONTACT.phoneHref}><FaPhoneAlt aria-hidden="true" /><span><small>Call MBA directly</small><strong>{CONTACT.phoneDisplay}</strong></span><FaArrowRight aria-hidden="true" /></a>
+                <a href={`mailto:${CONTACT.email}`}><FaEnvelope aria-hidden="true" /><span><small>Email enquiries</small><strong>{CONTACT.email}</strong></span><FaArrowRight aria-hidden="true" /></a>
+                <a href={CONTACT.maps} target="_blank" rel="noreferrer"><FaMapMarkerAlt aria-hidden="true" /><span><small>Business address</small><strong>{CONTACT.address}</strong></span><FaArrowRight aria-hidden="true" /></a>
               </div>
-              <div className="social-links" aria-label="Social media">
-                <a href="https://www.facebook.com/mbacleaningservicess/" target="_blank" rel="noreferrer" aria-label="MBA Cleaning Services on Facebook"><FaFacebookF aria-hidden="true" /></a>
-                <a href="https://www.instagram.com/mbacleaningservices" target="_blank" rel="noreferrer" aria-label="MBA Cleaning Services on Instagram"><FaInstagram aria-hidden="true" /></a>
+              <div className="social-row">
+                <span>Follow our latest work</span>
+                <div>
+                  <a href="https://www.facebook.com/mbacleaningservicess/" target="_blank" rel="noreferrer" aria-label="MBA Cleaning Services on Facebook"><FaFacebookF aria-hidden="true" /></a>
+                  <a href="https://www.instagram.com/mbacleaningservices" target="_blank" rel="noreferrer" aria-label="MBA Cleaning Services on Instagram"><FaInstagram aria-hidden="true" /></a>
+                </div>
               </div>
             </div>
 
             <div className="quote-card" id="quote">
               <div className="quote-card-heading">
-                <span>Free estimate</span>
+                <span>Free, no-obligation estimate</span>
                 <h3>Request your quote</h3>
-                <p>Fields marked * are required.</p>
+                <p>Complete the details below and MBA will contact you directly.</p>
               </div>
               <form action={`https://formsubmit.co/${CONTACT.email}`} method="POST">
-                <input type="hidden" name="_subject" value="New quote request from MBA Cleaning website" />
+                <input type="hidden" name="_subject" value="New MBA website quote request" />
                 <input type="hidden" name="_next" value="https://mbacleaningservice.com/thank-you.html" />
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_autoresponse" value="Thank you for contacting MBA Cleaning Services. We have received your enquiry and will respond as soon as possible." />
                 <input className="form-honeypot" type="text" name="_honey" tabIndex="-1" autoComplete="off" aria-hidden="true" />
                 <div className="form-row">
-                  <label>Full name *<input type="text" name="name" autoComplete="name" required /></label>
-                  <label>Phone number *<input type="tel" name="phone" autoComplete="tel" required /></label>
+                  <label>Full name *<input type="text" name="name" autoComplete="name" placeholder="Your name" required /></label>
+                  <label>Phone number *<input type="tel" name="phone" autoComplete="tel" placeholder="Best contact number" required /></label>
                 </div>
-                <label>Email address *<input type="email" name="email" autoComplete="email" required /></label>
+                <label>Email address *<input type="email" name="email" autoComplete="email" placeholder="you@example.com" required /></label>
                 <div className="form-row">
                   <label>Service *
                     <select name="service" defaultValue="" required>
@@ -458,11 +527,12 @@ function App() {
                       <option>Other</option>
                     </select>
                   </label>
-                  <label>Suburb *<input type="text" name="suburb" autoComplete="address-level2" required /></label>
+                  <label>Suburb *<input type="text" name="suburb" autoComplete="address-level2" placeholder="Property suburb" required /></label>
                 </div>
-                <label>Tell us about the job *<textarea name="message" rows="5" placeholder="Property type, areas involved, preferred timing and anything else we should know." required /></label>
-                <button className="button button-submit" type="submit">Send quote request <FaArrowRight aria-hidden="true" /></button>
-                <p className="form-note"><FaShieldAlt aria-hidden="true" /> Your details are used only to respond to your enquiry.</p>
+                <label>Property or business type<input type="text" name="property_type" placeholder="For example: office, home, gym or warehouse" /></label>
+                <label>Tell us about the job *<textarea name="message" rows="5" placeholder="Areas involved, preferred timing, frequency and anything else we should know." required /></label>
+                <button className="button button-submit" type="submit">Send my quote request <FaArrowRight aria-hidden="true" /></button>
+                <p className="form-note"><FaShieldAlt aria-hidden="true" /> Your details are used only to respond to this enquiry.</p>
               </form>
             </div>
           </div>
@@ -473,16 +543,16 @@ function App() {
         <div className="container footer-main">
           <div className="footer-brand">
             <LogoButton onOpen={() => setLogoOpen(true)} />
-            <div><strong>MBA Cleaning Services</strong><span>Cleaning &amp; vegetation services across Melbourne and Victoria.</span></div>
+            <p>Professional cleaning and vegetation services for Melbourne homes, businesses and facilities.</p>
+            <span>Click the logo to enlarge it.</span>
           </div>
-          <div className="footer-links">
-            <div><strong>Services</strong><a href="#services">Commercial cleaning</a><a href="#services">Residential cleaning</a><a href="#services">Vegetation management</a><a href="#services">Specialist cleaning</a></div>
-            <div><strong>Contact</strong><a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a><a href={CONTACT.maps} target="_blank" rel="noreferrer">Deer Park, Melbourne</a></div>
-          </div>
+          <div className="footer-column"><strong>Explore</strong><a href="#services">Services</a><a href="#why-mba">Why MBA</a><a href="#projects">Our work</a><a href="#reviews">Client reviews</a></div>
+          <div className="footer-column"><strong>Services</strong><a href="#services" onClick={() => setActiveService('commercial')}>Commercial</a><a href="#services" onClick={() => setActiveService('residential')}>Residential</a><a href="#services" onClick={() => setActiveService('grounds')}>Grounds care</a><a href="#quote">Request a quote</a></div>
+          <div className="footer-column footer-contact"><strong>Contact</strong><a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a><a href={CONTACT.maps} target="_blank" rel="noreferrer">Deer Park, Melbourne</a></div>
         </div>
         <div className="container footer-bottom">
-          <span>© {new Date().getFullYear()} MBA Cleaning and Vegetation Services. All rights reserved.</span>
-          <span>Professional property care across Melbourne.</span>
+          <span>© {new Date().getFullYear()} MBA Cleaning and Vegetation Services.</span>
+          <span>Melbourne, Victoria · Australia</span>
         </div>
       </footer>
 
@@ -499,11 +569,13 @@ function App() {
 
       {selectedImage && (
         <div className="modal-overlay" role="dialog" aria-modal="true" aria-label={selectedImage.alt} onClick={closeOverlays}>
-          <button className="modal-close" type="button" onClick={closeOverlays} aria-label="Close image"><FaTimes aria-hidden="true" /></button>
+          <button className="modal-close" type="button" onClick={closeOverlays} aria-label="Close project image"><FaTimes aria-hidden="true" /></button>
+          <button className="modal-arrow modal-arrow-left" type="button" onClick={(event) => { event.stopPropagation(); moveGallery(-1); }} aria-label="Previous project image"><FaChevronLeft aria-hidden="true" /></button>
           <figure className="gallery-modal" onClick={(event) => event.stopPropagation()}>
             <img src={selectedImage.src} alt={selectedImage.alt} />
-            <figcaption>{selectedImage.alt}</figcaption>
+            <figcaption><span>{selectedImage.category}</span><strong>{selectedImage.alt}</strong></figcaption>
           </figure>
+          <button className="modal-arrow modal-arrow-right" type="button" onClick={(event) => { event.stopPropagation(); moveGallery(1); }} aria-label="Next project image"><FaChevronRight aria-hidden="true" /></button>
         </div>
       )}
     </div>
