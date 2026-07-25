@@ -8,7 +8,7 @@ const Footer = () => {
         &copy; {new Date().getFullYear()} MBA Cleaning and Vegetation Services. All rights reserved.
       </p>
       <p>
-        Made by <a href="https://mftgworks.org" target="_blank" rel="noopener noreferrer">MFTG</a>
+        MBA Cleaning and Vegetation Services
       </p>
     </footer>
   );

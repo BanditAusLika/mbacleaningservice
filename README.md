@@ -4,7 +4,7 @@ Production website for MBA Cleaning and Vegetation Services, Melbourne.
 
 ## Contact form
 
-The quote form posts securely to FormSubmit and routes enquiries to `info@mbacleaningservice.com`. The mailbox owner must confirm FormSubmit's one-time activation email after the first submission.
+The quote form posts through FormSubmit's AJAX email-delivery endpoint and routes enquiries directly to `info@mbacleaningservice.com`. Visitors receive an inline success or error message without leaving the website, and the standard HTML form action remains as a no-JavaScript fallback. The MBA mailbox owner must confirm FormSubmit's one-time activation email after the first submission.
 
 ## Available Scripts
 

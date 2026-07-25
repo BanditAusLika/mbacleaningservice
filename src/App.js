@@ -180,6 +180,7 @@ function App() {
   const [activeService, setActiveService] = useState('commercial');
   const [galleryFilter, setGalleryFilter] = useState('All');
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const [formStatus, setFormStatus] = useState({ state: 'idle', message: '' });
 
   const activeServiceData = serviceGroups.find((item) => item.id === activeService) || serviceGroups[0];
   const filteredGallery = useMemo(
@@ -220,6 +221,38 @@ function App() {
   }, [logoOpen, selectedImageIndex]);
 
   const closeMenu = () => setMenuOpen(false);
+
+  const handleQuoteSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setFormStatus({ state: 'sending', message: 'Sending your quote request…' });
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${CONTACT.email}`, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: formData,
+      });
+      const result = await response.json();
+
+      if (!response.ok || result.success === false || result.success === 'false') {
+        throw new Error(result.message || 'The enquiry could not be sent.');
+      }
+
+      form.reset();
+      setFormStatus({
+        state: 'success',
+        message: 'Thank you. Your enquiry has been sent directly to MBA Cleaning Services.',
+      });
+    } catch (error) {
+      setFormStatus({
+        state: 'error',
+        message: `The form could not send right now. Please email ${CONTACT.email} directly.`,
+      });
+    }
+  };
 
   return (
     <div className="site-shell">
@@ -501,7 +534,7 @@ function App() {
                 <h3>Request your quote</h3>
                 <p>Complete the details below and MBA will contact you directly.</p>
               </div>
-              <form action={`https://formsubmit.co/${CONTACT.email}`} method="POST">
+              <form action={`https://formsubmit.co/${CONTACT.email}`} method="POST" onSubmit={handleQuoteSubmit}>
                 <input type="hidden" name="_subject" value="New MBA website quote request" />
                 <input type="hidden" name="_next" value="https://mbacleaningservice.com/thank-you.html" />
                 <input type="hidden" name="_template" value="table" />
@@ -531,7 +564,16 @@ function App() {
                 </div>
                 <label>Property or business type<input type="text" name="property_type" placeholder="For example: office, home, gym or warehouse" /></label>
                 <label>Tell us about the job *<textarea name="message" rows="5" placeholder="Areas involved, preferred timing, frequency and anything else we should know." required /></label>
-                <button className="button button-submit" type="submit">Send my quote request <FaArrowRight aria-hidden="true" /></button>
+                <button className="button button-submit" type="submit" disabled={formStatus.state === 'sending'}>
+                  {formStatus.state === 'sending' ? 'Sending…' : 'Send my quote request'}
+                  {formStatus.state !== 'sending' && <FaArrowRight aria-hidden="true" />}
+                </button>
+                {formStatus.message && (
+                  <p className={`form-status form-status-${formStatus.state}`} role="status" aria-live="polite">
+                    {formStatus.message}
+                    {formStatus.state === 'error' && <> <a href={`mailto:${CONTACT.email}`}>Open email</a></>}
+                  </p>
+                )}
                 <p className="form-note"><FaShieldAlt aria-hidden="true" /> Your details are used only to respond to this enquiry.</p>
               </form>
             </div>
