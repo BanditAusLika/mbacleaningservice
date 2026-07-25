@@ -1,21 +1,20 @@
 import React from 'react';
 import './Services.css';
 
-function VegetationServices() {
+function CleaningServices() {
   return (
-    <section id="vegetation-services-section">
-      <h2>Vegetation Services</h2>
+    <section id="cleaning-services-section">
+      <h2>Cleaning Services</h2>
       <ul>
-        <li>Lawn Mowing</li>
-        <li>Brush Cutting</li>
-        <li>Herbicide Application</li>
-        <li>Tree Lopping</li>
-        <li>Garden Maintenance</li>
-        <li>Edge Trimming</li>
-        <li>Hand Weeding</li>
+        <li>Commercial Cleaning</li>
+        <li>Residential Cleaning</li>
+        <li>Carpet and Upholstery Cleaning</li>
+        <li>Pressure Washing</li>
+        <li>Window Cleaning</li>
+        <li>Post-Construction Cleaning</li>
       </ul>
     </section>
   );
 }
 
-export default VegetationServices;
+export default CleaningServices;

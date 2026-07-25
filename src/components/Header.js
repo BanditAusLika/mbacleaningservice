@@ -14,7 +14,7 @@ const Header = () => {
       <nav className="navbar">
         <button onClick={() => scrollToSection('about-section')}>About Us</button>
         <button onClick={() => scrollToSection('cleaning-services-section')}>Cleaning Services</button>
-        <button onClick={() => scrollToSection('vegetation-services-section')}>Vegetation Services</button>
+        <button onClick={() => scrollToSection('cleaning-services-section')}>Specialist Cleaning</button>
         <button onClick={() => scrollToSection('gallery-section')}>Gallery</button>
         <button onClick={() => scrollToSection('reviews-section')}>Reviews</button>
         <button onClick={() => scrollToSection('contact-section')}>Contact</button>

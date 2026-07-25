@@ -434,7 +434,7 @@
 .service-switcher {
   max-width: 640px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   margin-bottom: 22px;
   padding: 6px;
   background: #e9e7e3;

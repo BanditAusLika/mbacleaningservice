@@ -58,10 +58,6 @@ export const mediaFiles = [
   'images/gallery/55.jpg',
   'images/gallery/56.jpg',
   'images/gallery/57.jpg',
-  'images/gallery/veg1.jpg',
-  'images/gallery/veg2.jpg',
-  'images/gallery/veg3.jpg',
-  'images/gallery/veg4.jpg',
   'images/gallery/vid1.mp4',
   'images/gallery/vid2.mp4',
   'images/gallery/vid3.mp4'

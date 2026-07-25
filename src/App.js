@@ -10,7 +10,6 @@ import {
   FaFacebookF,
   FaHome,
   FaInstagram,
-  FaLeaf,
   FaMapMarkerAlt,
   FaPlay,
   FaPhoneAlt,
@@ -76,24 +75,6 @@ const serviceGroups = [
       'Outdoor surface pressure washing',
     ],
   },
-  {
-    id: 'grounds',
-    label: 'Grounds',
-    icon: FaLeaf,
-    kicker: 'Practical outdoor maintenance',
-    title: 'Grounds kept safe, neat and under control.',
-    text: 'Vegetation and garden services for residential, commercial and larger properties. MBA can coordinate inside and outside work through one dependable point of contact.',
-    image: '/images/gallery/veg2.jpg',
-    imageAlt: 'Before and after vegetation maintenance completed by MBA',
-    services: [
-      'Lawn mowing and edge trimming',
-      'Brush cutting and overgrowth clearance',
-      'Garden and seasonal maintenance',
-      'Tree pruning and small-tree removal',
-      'Detailed hand weeding',
-      'Green-waste removal on request',
-    ],
-  },
 ];
 
 const galleryDescriptions = {
@@ -117,23 +98,14 @@ const cleaningGallery = Array.from({ length: 57 }, (_, index) => {
   };
 });
 
-const groundsGallery = Array.from({ length: 4 }, (_, index) => ({
-  src: `/images/gallery/veg${index + 1}.jpg`,
-  alt: index === 1
-    ? 'Vegetation maintenance before and after'
-    : `MBA grounds and vegetation maintenance project ${index + 1}`,
-  category: 'Grounds',
-  type: 'image',
-}));
-
 const videoGallery = Array.from({ length: 3 }, (_, index) => ({
   src: `/images/gallery/vid${index + 1}.mp4`,
-  alt: `MBA cleaning and property-care project video ${index + 1}`,
+  alt: `MBA professional cleaning project video ${index + 1}`,
   category: 'Videos',
   type: 'video',
 }));
 
-const galleryItems = [...cleaningGallery, ...groundsGallery, ...videoGallery];
+const galleryItems = [...cleaningGallery, ...videoGallery];
 
 const reviews = [
   {
@@ -171,15 +143,15 @@ const reviews = [
 const faqs = [
   {
     question: 'Do you provide both one-off and recurring services?',
-    answer: 'Yes. MBA can quote one-off deep cleans, project and handover work, plus recurring residential, commercial and grounds-maintenance schedules.',
+    answer: 'Yes. MBA can quote one-off deep cleans, project and handover work, plus recurring residential and commercial cleaning schedules.',
   },
   {
     question: 'Can you work around business operating hours?',
     answer: 'Yes. We discuss site access, preferred timing and operational requirements before confirming the schedule so the service causes minimal disruption.',
   },
   {
-    question: 'Can cleaning and vegetation work be arranged together?',
-    answer: 'Yes. MBA can coordinate internal cleaning and external vegetation or garden maintenance through one point of contact.',
+    question: 'Do you provide specialist cleaning services?',
+    answer: 'Yes. MBA provides carpet and upholstery steam cleaning, window cleaning, pressure washing, detailed deep cleaning and post-construction cleaning.',
   },
   {
     question: 'Which areas do you service?',
@@ -297,7 +269,7 @@ function App() {
         <div className="container header-inner">
           <a className="brand" href="#top" aria-label="MBA Cleaning Services home" onClick={closeMenu}>
             <img src="/logo.jpg" alt="" />
-            <span><strong>MBA</strong><small>Cleaning &amp; Vegetation</small></span>
+            <span><strong>MBA</strong><small>Cleaning Services</small></span>
           </a>
 
           <button
@@ -323,9 +295,9 @@ function App() {
           <div className="hero-ambient" aria-hidden="true" />
           <div className="container hero-grid">
             <div className="hero-copy">
-              <p className="eyebrow"><span /> Melbourne cleaning &amp; grounds specialists</p>
+              <p className="eyebrow"><span /> Melbourne cleaning specialists</p>
               <h1>Professional care for <em>every part</em> of your property.</h1>
-              <p className="hero-lead">Commercial and residential cleaning, specialist surface work and vegetation maintenance—coordinated through one responsive local team.</p>
+              <p className="hero-lead">Commercial and residential cleaning, pressure washing, steam cleaning and detailed project work—delivered by one responsive local team.</p>
               <div className="hero-actions">
                 <a className="button button-primary" href="#quote">Request a free quote <FaArrowRight aria-hidden="true" /></a>
                 <a className="button button-secondary" href={CONTACT.phoneHref}><FaPhoneAlt aria-hidden="true" /> {CONTACT.phoneDisplay}</a>
@@ -364,7 +336,7 @@ function App() {
         <section className="section services" id="services">
           <div className="container">
             <div className="section-heading split-heading">
-              <div><span className="section-kicker">Property care, properly coordinated</span><h2>Choose the service pathway that fits your site.</h2></div>
+              <div><span className="section-kicker">Cleaning plans, properly coordinated</span><h2>Choose the cleaning service that fits your site.</h2></div>
               <p>Start with your property type. MBA can then tailor the scope, frequency and timing around the outcome you need.</p>
             </div>
 
@@ -412,16 +384,16 @@ function App() {
             <div className="why-media">
               <img className="why-main" src="/images/gallery/40.jpg" alt="MBA team member completing commercial window cleaning" loading="lazy" />
               <img className="why-detail" src="/images/gallery/1.jpg" alt="Detailed bathroom cleaning result" loading="lazy" />
-              <div className="why-badge"><strong>One team</strong><span>Indoor, exterior &amp; grounds</span></div>
+              <div className="why-badge"><strong>One team</strong><span>Commercial, residential &amp; specialist</span></div>
             </div>
             <div className="why-copy">
               <span className="section-kicker">Why businesses and households choose MBA</span>
               <h2>Professional standards. Direct local accountability.</h2>
-              <p className="why-intro">MBA Cleaning and Vegetation Services is a family-owned Australian business based in Deer Park. You receive responsive communication, practical scheduling and visible care from the first conversation to the final result.</p>
+              <p className="why-intro">MBA Cleaning Services is a family-owned Australian business based in Deer Park. You receive responsive communication, practical scheduling and visible care from the first conversation to the final result.</p>
               <div className="principles">
                 <article><span>01</span><div><h3>Scope before promises</h3><p>We clarify the property, priorities and timing so the quote reflects the work required.</p></div></article>
                 <article><span>02</span><div><h3>Service that fits the site</h3><p>One-off projects and recurring schedules can be shaped around access and operating needs.</p></div></article>
-                <article><span>03</span><div><h3>One point of contact</h3><p>Coordinate cleaning, specialist work and grounds care without juggling multiple providers.</p></div></article>
+                <article><span>03</span><div><h3>One point of contact</h3><p>Coordinate recurring cleaning, deep cleans and specialist work without juggling multiple providers.</p></div></article>
               </div>
               <a className="button button-dark" href="#quote">Plan your service <FaArrowRight aria-hidden="true" /></a>
             </div>
@@ -433,7 +405,7 @@ function App() {
             <div><strong>Commercial</strong><span>Presentation-ready workplaces</span></div>
             <div><strong>Residential</strong><span>Detailed, flexible home care</span></div>
             <div><strong>Specialist</strong><span>Surfaces, steam and handover work</span></div>
-            <div><strong>Grounds</strong><span>Practical vegetation maintenance</span></div>
+            <div><strong>Recurring</strong><span>Reliable scheduled cleaning</span></div>
           </div>
         </section>
 
@@ -460,10 +432,10 @@ function App() {
           <div className="container">
             <div className="section-heading split-heading projects-heading">
               <div><span className="section-kicker">Documented project work</span><h2>See the standard for yourself.</h2></div>
-              <p>Browse MBA's complete collection of cleaning and grounds-maintenance photos and videos. Select any item for a full-screen view.</p>
+              <p>Browse MBA's complete collection of professional cleaning photos and videos. Select any item for a full-screen view.</p>
             </div>
             <div className="gallery-filters" aria-label="Filter project gallery">
-              {['All', 'Cleaning', 'Grounds', 'Videos'].map((filter) => (
+              {['All', 'Cleaning', 'Videos'].map((filter) => (
                 <button key={filter} type="button" className={galleryFilter === filter ? 'is-active' : ''} onClick={() => { setGalleryFilter(filter); setSelectedImageIndex(null); }}>
                   {filter}
                 </button>
@@ -594,8 +566,8 @@ function App() {
                       <option>Carpet or upholstery cleaning</option>
                       <option>Window or pressure cleaning</option>
                       <option>Post-construction cleaning</option>
-                      <option>Vegetation or garden maintenance</option>
-                      <option>Cleaning and grounds package</option>
+                      <option>End-of-lease or deep cleaning</option>
+                      <option>Recurring cleaning program</option>
                       <option>Other</option>
                     </select>
                   </label>
@@ -624,15 +596,15 @@ function App() {
         <div className="container footer-main">
           <div className="footer-brand">
             <LogoButton onOpen={() => setLogoOpen(true)} />
-            <p>Professional cleaning and vegetation services for Melbourne homes, businesses and facilities.</p>
+            <p>Professional cleaning services for Melbourne homes, businesses and facilities.</p>
             <span>Click the logo to enlarge it.</span>
           </div>
           <div className="footer-column"><strong>Explore</strong><a href="#services">Services</a><a href="#why-mba">Why MBA</a><a href="#projects">Our work</a><a href="#reviews">Client reviews</a></div>
-          <div className="footer-column"><strong>Services</strong><a href="#services" onClick={() => setActiveService('commercial')}>Commercial</a><a href="#services" onClick={() => setActiveService('residential')}>Residential</a><a href="#services" onClick={() => setActiveService('grounds')}>Grounds care</a><a href="#quote">Request a quote</a></div>
+          <div className="footer-column"><strong>Services</strong><a href="#services" onClick={() => setActiveService('commercial')}>Commercial</a><a href="#services" onClick={() => setActiveService('residential')}>Residential</a><a href="#services">Specialist cleaning</a><a href="#quote">Request a quote</a></div>
           <div className="footer-column footer-contact"><strong>Contact</strong><a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a><a href={CONTACT.maps} target="_blank" rel="noreferrer">Deer Park, Melbourne</a></div>
         </div>
         <div className="container footer-bottom">
-          <span>© {new Date().getFullYear()} MBA Cleaning and Vegetation Services.</span>
+          <span>© {new Date().getFullYear()} MBA Cleaning Services.</span>
           <span>Melbourne, Victoria · Australia</span>
         </div>
       </footer>

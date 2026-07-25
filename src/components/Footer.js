@@ -5,10 +5,10 @@ const Footer = () => {
   return (
     <footer className="footer">
       <p>
-        &copy; {new Date().getFullYear()} MBA Cleaning and Vegetation Services. All rights reserved.
+        &copy; {new Date().getFullYear()} MBA Cleaning Services. All rights reserved.
       </p>
       <p>
-        MBA Cleaning and Vegetation Services
+        MBA Cleaning Services
       </p>
     </footer>
   );

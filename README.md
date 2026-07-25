@@ -1,6 +1,6 @@
-# MBA Cleaning and Vegetation Services
+# MBA Cleaning Services
 
-Production website for MBA Cleaning and Vegetation Services, Melbourne.
+Production website for MBA Cleaning Services, Melbourne.
 
 ## Contact form
 
