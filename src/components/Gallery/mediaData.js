@@ -64,6 +64,5 @@ export const mediaFiles = [
   'images/gallery/veg4.jpg',
   'images/gallery/vid1.mp4',
   'images/gallery/vid2.mp4',
-  'images/gallery/vid3.mp4',
-  'images/gallery/vid4.mp4'
+  'images/gallery/vid3.mp4'
 ];

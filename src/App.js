@@ -12,6 +12,7 @@ import {
   FaInstagram,
   FaLeaf,
   FaMapMarkerAlt,
+  FaPlay,
   FaPhoneAlt,
   FaQuoteLeft,
   FaRegCalendarCheck,
@@ -95,20 +96,44 @@ const serviceGroups = [
   },
 ];
 
-const galleryItems = [
-  { src: '/images/gallery/50.jpg', alt: 'Large commercial floor cleaning project', category: 'Commercial' },
-  { src: '/images/gallery/40.jpg', alt: 'Elevated exterior window cleaning', category: 'Specialist' },
-  { src: '/images/gallery/1.jpg', alt: 'Detailed bathroom cleaning result', category: 'Residential' },
-  { src: '/images/gallery/20.jpg', alt: 'Commercial floor polishing in progress', category: 'Commercial' },
-  { src: '/images/gallery/10.jpg', alt: 'High-pressure surface cleaning', category: 'Specialist' },
-  { src: '/images/gallery/30.jpg', alt: 'Commercial carpet cleaning result', category: 'Commercial' },
-  { src: '/images/gallery/45.jpg', alt: 'Recent detailed cleaning project', category: 'Residential' },
-  { src: '/images/gallery/55.jpg', alt: 'Professional property cleaning result', category: 'Residential' },
-  { src: '/images/gallery/veg1.jpg', alt: 'Vegetation maintenance project', category: 'Grounds' },
-  { src: '/images/gallery/veg2.jpg', alt: 'Vegetation maintenance before and after', category: 'Grounds' },
-  { src: '/images/gallery/veg3.jpg', alt: 'Grounds maintenance completed by MBA', category: 'Grounds' },
-  { src: '/images/gallery/veg4.jpg', alt: 'Outdoor property maintenance project', category: 'Grounds' },
-];
+const galleryDescriptions = {
+  1: 'Detailed bathroom cleaning result',
+  10: 'High-pressure surface cleaning',
+  20: 'Commercial floor polishing in progress',
+  30: 'Commercial carpet cleaning result',
+  40: 'Elevated exterior window cleaning',
+  45: 'Detailed property cleaning project',
+  50: 'Large commercial floor cleaning project',
+  55: 'Professional property cleaning result',
+};
+
+const cleaningGallery = Array.from({ length: 57 }, (_, index) => {
+  const number = index + 1;
+  return {
+    src: `/images/gallery/${number}.jpg`,
+    alt: galleryDescriptions[number] || `MBA professional cleaning project ${String(number).padStart(2, '0')}`,
+    category: 'Cleaning',
+    type: 'image',
+  };
+});
+
+const groundsGallery = Array.from({ length: 4 }, (_, index) => ({
+  src: `/images/gallery/veg${index + 1}.jpg`,
+  alt: index === 1
+    ? 'Vegetation maintenance before and after'
+    : `MBA grounds and vegetation maintenance project ${index + 1}`,
+  category: 'Grounds',
+  type: 'image',
+}));
+
+const videoGallery = Array.from({ length: 3 }, (_, index) => ({
+  src: `/images/gallery/vid${index + 1}.mp4`,
+  alt: `MBA cleaning and property-care project video ${index + 1}`,
+  category: 'Videos',
+  type: 'video',
+}));
+
+const galleryItems = [...cleaningGallery, ...groundsGallery, ...videoGallery];
 
 const reviews = [
   {
@@ -435,20 +460,34 @@ function App() {
           <div className="container">
             <div className="section-heading split-heading projects-heading">
               <div><span className="section-kicker">Documented project work</span><h2>See the standard for yourself.</h2></div>
-              <p>Browse selected cleaning, specialist and grounds-maintenance work. Select any image for a closer view.</p>
+              <p>Browse MBA's complete collection of cleaning and grounds-maintenance photos and videos. Select any item for a full-screen view.</p>
             </div>
             <div className="gallery-filters" aria-label="Filter project gallery">
-              {['All', 'Commercial', 'Residential', 'Specialist', 'Grounds'].map((filter) => (
+              {['All', 'Cleaning', 'Grounds', 'Videos'].map((filter) => (
                 <button key={filter} type="button" className={galleryFilter === filter ? 'is-active' : ''} onClick={() => { setGalleryFilter(filter); setSelectedImageIndex(null); }}>
                   {filter}
                 </button>
               ))}
+              <span className="gallery-count" aria-live="polite">{filteredGallery.length} {filteredGallery.length === 1 ? 'item' : 'items'}</span>
             </div>
             <div className="gallery-grid">
-              {filteredGallery.map((image, index) => (
-                <button key={image.src} type="button" className="gallery-card" onClick={() => setSelectedImageIndex(index)} aria-label={`Open project image: ${image.alt}`}>
-                  <img src={image.src} alt={image.alt} loading="lazy" />
-                  <span><small>{image.category}</small><strong>{image.alt}</strong><i>View <FaArrowRight aria-hidden="true" /></i></span>
+              {filteredGallery.map((item, index) => (
+                <button
+                  key={item.src}
+                  type="button"
+                  className={`gallery-card ${item.type === 'video' ? 'gallery-card-video' : ''}`}
+                  onClick={() => setSelectedImageIndex(index)}
+                  aria-label={`Open project ${item.type}: ${item.alt}`}
+                >
+                  {item.type === 'video' ? (
+                    <>
+                      <video src={`${item.src}#t=0.1`} muted playsInline preload="metadata" aria-hidden="true" tabIndex="-1" />
+                      <b className="video-play"><FaPlay aria-hidden="true" /></b>
+                    </>
+                  ) : (
+                    <img src={item.src} alt={item.alt} loading="lazy" />
+                  )}
+                  <span><small>{item.category}</small><strong>{item.alt}</strong><i>{item.type === 'video' ? 'Play' : 'View'} <FaArrowRight aria-hidden="true" /></i></span>
                 </button>
               ))}
             </div>
@@ -611,13 +650,20 @@ function App() {
 
       {selectedImage && (
         <div className="modal-overlay" role="dialog" aria-modal="true" aria-label={selectedImage.alt} onClick={closeOverlays}>
-          <button className="modal-close" type="button" onClick={closeOverlays} aria-label="Close project image"><FaTimes aria-hidden="true" /></button>
-          <button className="modal-arrow modal-arrow-left" type="button" onClick={(event) => { event.stopPropagation(); moveGallery(-1); }} aria-label="Previous project image"><FaChevronLeft aria-hidden="true" /></button>
+          <button className="modal-close" type="button" onClick={closeOverlays} aria-label="Close project viewer"><FaTimes aria-hidden="true" /></button>
+          <button className="modal-arrow modal-arrow-left" type="button" onClick={(event) => { event.stopPropagation(); moveGallery(-1); }} aria-label="Previous project item"><FaChevronLeft aria-hidden="true" /></button>
           <figure className="gallery-modal" onClick={(event) => event.stopPropagation()}>
-            <img src={selectedImage.src} alt={selectedImage.alt} />
-            <figcaption><span>{selectedImage.category}</span><strong>{selectedImage.alt}</strong></figcaption>
+            {selectedImage.type === 'video' ? (
+              <video key={selectedImage.src} src={selectedImage.src} controls autoPlay playsInline preload="metadata" />
+            ) : (
+              <img src={selectedImage.src} alt={selectedImage.alt} onClick={closeOverlays} title="Click to return to the gallery" />
+            )}
+            <figcaption>
+              <span>{selectedImage.category} · {selectedImageIndex + 1} of {filteredGallery.length}</span>
+              <strong>{selectedImage.alt}</strong>
+            </figcaption>
           </figure>
-          <button className="modal-arrow modal-arrow-right" type="button" onClick={(event) => { event.stopPropagation(); moveGallery(1); }} aria-label="Next project image"><FaChevronRight aria-hidden="true" /></button>
+          <button className="modal-arrow modal-arrow-right" type="button" onClick={(event) => { event.stopPropagation(); moveGallery(1); }} aria-label="Next project item"><FaChevronRight aria-hidden="true" /></button>
         </div>
       )}
     </div>
