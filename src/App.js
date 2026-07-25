@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FaArrowRight,
   FaBars,
@@ -21,6 +21,8 @@ import {
   FaWater,
 } from 'react-icons/fa';
 import './App.css';
+import GalleryPage from './GalleryPage';
+import { featuredGallery } from './galleryData';
 
 const CONTACT = {
   phoneDisplay: '0415 081 517',
@@ -31,11 +33,11 @@ const CONTACT = {
 };
 
 const navItems = [
-  ['Services', 'services'],
-  ['Why MBA', 'why-mba'],
-  ['Our work', 'projects'],
-  ['Reviews', 'reviews'],
-  ['Contact', 'contact'],
+  ['Services', '#services'],
+  ['Why MBA', '#why-mba'],
+  ['Gallery', '/gallery/'],
+  ['Reviews', '#reviews'],
+  ['Contact', '#contact'],
 ];
 
 const serviceGroups = [
@@ -76,36 +78,6 @@ const serviceGroups = [
     ],
   },
 ];
-
-const galleryDescriptions = {
-  1: 'Detailed bathroom cleaning result',
-  10: 'High-pressure surface cleaning',
-  20: 'Commercial floor polishing in progress',
-  30: 'Commercial carpet cleaning result',
-  40: 'Elevated exterior window cleaning',
-  45: 'Detailed property cleaning project',
-  50: 'Large commercial floor cleaning project',
-  55: 'Professional property cleaning result',
-};
-
-const cleaningGallery = Array.from({ length: 57 }, (_, index) => {
-  const number = index + 1;
-  return {
-    src: `/images/gallery/${number}.jpg`,
-    alt: galleryDescriptions[number] || `MBA professional cleaning project ${String(number).padStart(2, '0')}`,
-    category: 'Cleaning',
-    type: 'image',
-  };
-});
-
-const videoGallery = Array.from({ length: 3 }, (_, index) => ({
-  src: `/images/gallery/vid${index + 1}.mp4`,
-  alt: `MBA professional cleaning project video ${index + 1}`,
-  category: 'Videos',
-  type: 'video',
-}));
-
-const galleryItems = [...cleaningGallery, ...videoGallery];
 
 const reviews = [
   {
@@ -171,19 +143,15 @@ function LogoButton({ className = '', onOpen }) {
   );
 }
 
-function App() {
+function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [logoOpen, setLogoOpen] = useState(false);
   const [activeService, setActiveService] = useState('commercial');
-  const [galleryFilter, setGalleryFilter] = useState('All');
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [formStatus, setFormStatus] = useState({ state: 'idle', message: '' });
 
   const activeServiceData = serviceGroups.find((item) => item.id === activeService) || serviceGroups[0];
-  const filteredGallery = useMemo(
-    () => galleryItems.filter((item) => galleryFilter === 'All' || item.category === galleryFilter),
-    [galleryFilter],
-  );
+  const filteredGallery = featuredGallery;
   const selectedImage = selectedImageIndex === null ? null : filteredGallery[selectedImageIndex];
 
   const closeOverlays = () => {
@@ -284,7 +252,7 @@ function App() {
           </button>
 
           <nav id="primary-navigation" className={menuOpen ? 'primary-nav is-open' : 'primary-nav'} aria-label="Primary navigation">
-            {navItems.map(([label, id]) => <a key={id} href={`#${id}`} onClick={closeMenu}>{label}</a>)}
+            {navItems.map(([label, href]) => <a key={href} href={href} onClick={closeMenu}>{label}</a>)}
             <a className="nav-cta" href="#quote" onClick={closeMenu}>Request a quote <FaArrowRight aria-hidden="true" /></a>
           </nav>
         </div>
@@ -431,18 +399,10 @@ function App() {
         <section className="section projects" id="projects">
           <div className="container">
             <div className="section-heading split-heading projects-heading">
-              <div><span className="section-kicker">Documented project work</span><h2>See the standard for yourself.</h2></div>
-              <p>Browse MBA's complete collection of professional cleaning photos and videos. Select any item for a full-screen view.</p>
+              <div><span className="section-kicker">Selected project work</span><h2>See the standard for yourself.</h2></div>
+              <p>A preview of recent cleaning results. Visit the dedicated gallery for all 57 photos and three project videos.</p>
             </div>
-            <div className="gallery-filters" aria-label="Filter project gallery">
-              {['All', 'Cleaning', 'Videos'].map((filter) => (
-                <button key={filter} type="button" className={galleryFilter === filter ? 'is-active' : ''} onClick={() => { setGalleryFilter(filter); setSelectedImageIndex(null); }}>
-                  {filter}
-                </button>
-              ))}
-              <span className="gallery-count" aria-live="polite">{filteredGallery.length} {filteredGallery.length === 1 ? 'item' : 'items'}</span>
-            </div>
-            <div className="gallery-grid">
+            <div className="gallery-grid home-gallery-preview">
               {filteredGallery.map((item, index) => (
                 <button
                   key={item.src}
@@ -462,6 +422,10 @@ function App() {
                   <span><small>{item.category}</small><strong>{item.alt}</strong><i>{item.type === 'video' ? 'Play' : 'View'} <FaArrowRight aria-hidden="true" /></i></span>
                 </button>
               ))}
+            </div>
+            <div className="gallery-home-cta">
+              <a className="button button-primary" href="/gallery/">View the complete gallery <FaArrowRight aria-hidden="true" /></a>
+              <span>60 cleaning photos and videos</span>
             </div>
           </div>
         </section>
@@ -599,7 +563,7 @@ function App() {
             <p>Professional cleaning services for Melbourne homes, businesses and facilities.</p>
             <span>Click the logo to enlarge it.</span>
           </div>
-          <div className="footer-column"><strong>Explore</strong><a href="#services">Services</a><a href="#why-mba">Why MBA</a><a href="#projects">Our work</a><a href="#reviews">Client reviews</a></div>
+          <div className="footer-column"><strong>Explore</strong><a href="#services">Services</a><a href="#why-mba">Why MBA</a><a href="/gallery/">Gallery</a><a href="#reviews">Client reviews</a></div>
           <div className="footer-column"><strong>Services</strong><a href="#services" onClick={() => setActiveService('commercial')}>Commercial</a><a href="#services" onClick={() => setActiveService('residential')}>Residential</a><a href="#services">Specialist cleaning</a><a href="#quote">Request a quote</a></div>
           <div className="footer-column footer-contact"><strong>Contact</strong><a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a><a href={CONTACT.maps} target="_blank" rel="noreferrer">Deer Park, Melbourne</a></div>
         </div>
@@ -616,7 +580,7 @@ function App() {
       {logoOpen && (
         <div className="modal-overlay" role="dialog" aria-modal="true" aria-label="MBA Cleaning Services logo" onClick={closeOverlays}>
           <button className="modal-close" type="button" onClick={closeOverlays} aria-label="Close logo"><FaTimes aria-hidden="true" /></button>
-          <img className="logo-modal-image" src="/logo.jpg" alt="MBA Cleaning Services logo" onClick={(event) => event.stopPropagation()} />
+          <img className="logo-modal-image" src="/logo.jpg" alt="MBA Cleaning Services logo" onClick={closeOverlays} title="Click to close" />
         </div>
       )}
 
@@ -640,6 +604,11 @@ function App() {
       )}
     </div>
   );
+}
+
+function App() {
+  const path = window.location.pathname.replace(/\/+$/, '') || '/';
+  return path === '/gallery' ? <GalleryPage /> : <HomePage />;
 }
 
 export default App;
