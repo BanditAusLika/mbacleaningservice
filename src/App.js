@@ -523,7 +523,7 @@ function App() {
                 <span>Follow our latest work</span>
                 <div>
                   <a href="https://www.facebook.com/mbacleaningservicess/" target="_blank" rel="noreferrer" aria-label="MBA Cleaning Services on Facebook"><FaFacebookF aria-hidden="true" /></a>
-                  <a href="https://www.instagram.com/mbacleaningservices" target="_blank" rel="noreferrer" aria-label="MBA Cleaning Services on Instagram"><FaInstagram aria-hidden="true" /></a>
+                  <a href="https://www.instagram.com/mba_cleaningservices/" target="_blank" rel="noreferrer" aria-label="MBA Cleaning Services on Instagram"><FaInstagram aria-hidden="true" /></a>
                 </div>
               </div>
             </div>

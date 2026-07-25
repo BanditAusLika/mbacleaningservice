@@ -43,7 +43,7 @@ const Contact = () => {
           <FaInstagram className="contact-icon" />
           <span>Follow us on Instagram: </span>
           <a
-            href="https://www.instagram.com/mbacleaningservices"
+            href="https://www.instagram.com/mba_cleaningservices/"
             target="_blank"
             rel="noopener noreferrer"
           >
