@@ -487,7 +487,7 @@ function HomePage() {
           <div className="container contact-grid">
             <div className="contact-copy">
               <span className="section-kicker light-kicker">Your property. Your priorities.</span>
-              <h2>Tell us what needs attention.</h2>
+              <h2>Tell us what needs attention.</h2><h3>Commercial &amp; body corporate contracts</h3><p>Facility and property managers in western Melbourne can request a free on-site walkthrough. Include the site size and your preferred cleaning schedule below.</p>
               <p>Send the essentials and MBA will respond with the right questions and a clear next step. Quotes are free and there is no obligation.</p>
               <div className="contact-methods">
                 <a href={CONTACT.phoneHref}><FaPhoneAlt aria-hidden="true" /><span><small>Call MBA directly</small><strong>{CONTACT.phoneDisplay}</strong></span><FaArrowRight aria-hidden="true" /></a>
@@ -509,7 +509,7 @@ function HomePage() {
                 <h3>Request your quote</h3>
                 <p>Complete the details below and MBA will contact you directly.</p>
               </div>
-              <form action={`https://formsubmit.co/${CONTACT.email}`} method="POST" onSubmit={handleQuoteSubmit}>
+              <form action={`https://formsubmit.co/${CONTACT.email}`} method="POST" encType="multipart/form-data" onSubmit={handleQuoteSubmit}>
                 <input type="hidden" name="_subject" value="New MBA website quote request" />
                 <input type="hidden" name="_next" value="https://mbacleaningservice.com/thank-you.html" />
                 <input type="hidden" name="_template" value="table" />
@@ -537,6 +537,14 @@ function HomePage() {
                   </label>
                   <label>Suburb *<input type="text" name="suburb" autoComplete="address-level2" placeholder="Property suburb" required /></label>
                 </div>
+                <label>Approximate floor area (m²)<input type="number" min="1" name="area_m2" placeholder="If known" /></label>
+                <label>Cleaning frequency<select name="frequency"><option>One-off</option><option>Weekly commercial contract</option><option>Fortnightly commercial contract</option><option>Other schedule</option></select></label>
+                <label>Job photos (up to three images, 5 MB total)<input name="attachment" type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={event => {
+                  const input = event.currentTarget;
+                  const photos = Array.from(input.files || []);
+                  input.setCustomValidity(photos.length > 3 || photos.reduce((total, photo) => total + photo.size, 0) > 5000000 ? 'Choose up to three photos totalling 5 MB or less.' : '');
+                  input.reportValidity();
+                }} /></label>
                 <label>Property or business type<input type="text" name="property_type" placeholder="For example: office, home, gym or warehouse" /></label>
                 <label>Tell us about the job *<textarea name="message" rows="5" placeholder="Areas involved, preferred timing, frequency and anything else we should know." required /></label>
                 <button className="button button-submit" type="submit" disabled={formStatus.state === 'sending'}>
@@ -569,7 +577,7 @@ function HomePage() {
         </div>
         <div className="container footer-bottom">
           <span>© {new Date().getFullYear()} MBA Cleaning Services.</span>
-          <span>Melbourne, Victoria · Australia</span>
+          <a href="https://mftgworks.org/?utm_source=mbacleaning">Website &amp; Quote System by MFTG IT Solutions</a><span>Melbourne, Victoria · Australia</span>
         </div>
       </footer>
 
