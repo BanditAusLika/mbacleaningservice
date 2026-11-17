@@ -172,7 +172,7 @@ function GalleryPage() {
           <div className="footer-column"><strong>Cleaning</strong><a href="/#services">Commercial</a><a href="/#services">Residential</a><a href="/#services">Specialist cleaning</a><a href="/#quote">Request a quote</a></div>
           <div className="footer-column footer-contact"><strong>Contact</strong><a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a><a href={CONTACT.maps} target="_blank" rel="noreferrer">Deer Park, Melbourne</a><div className="gallery-socials"><a href="https://www.facebook.com/mbacleaningservicess/" target="_blank" rel="noreferrer" aria-label="MBA on Facebook"><FaFacebookF /></a><a href="https://www.instagram.com/mba_cleaningservices/" target="_blank" rel="noreferrer" aria-label="MBA on Instagram"><FaInstagram /></a></div></div>
         </div>
-        <div className="container footer-bottom"><span>© {new Date().getFullYear()} MBA Cleaning Services.</span><span>Melbourne, Victoria · Australia</span></div>
+        <div className="container footer-bottom"><span>© {new Date().getFullYear()} MBA Cleaning Services.</span><a href="https://mftgworks.org/?utm_source=mbacleaning">Website &amp; Quote System by MFTG IT Solutions</a><span>Melbourne, Victoria · Australia</span></div>
       </footer>
 
       <a className="mobile-call" href={CONTACT.phoneHref}><FaPhoneAlt aria-hidden="true" /><span>Call for a free quote</span></a>
